@@ -4,6 +4,6 @@
 
 1. Hahed files
 
-    - [Client Plain Text](client_aes.py)
-    - [Server Plain Text](server_aes.py)
-    - [Wireshark capture](capture_aes.pcap)
+    - [Client Plain Text](client_hash.py)
+    - [Server Plain Text](server_hash.py)
+    - [Wireshark capture](capture_hash.pcap)
