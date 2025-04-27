@@ -15,7 +15,7 @@ def connect_and_decrypt(host, port, key):
     Returns:
         str: The decrypted message
     """
-    # Convert the hex key to bytes if it's provided as a hex string
+    # Convert the hex key to bytes
     if isinstance(key, str):
         key = binascii.unhexlify(key.replace('0x', ''))
     
@@ -95,8 +95,8 @@ def receive_all(sock, buffer_size=4096):
 
 def main():
     # Server details
-    host = "localhost"  # Replace with your server address
-    port = 8888         # Replace with your server port
+    host = "localhost"  # Server address
+    port = 8888         # Server port
     
     # AES key (16 bytes = 128 bits)
     key = "00112233445566778899aabbccddeeff"

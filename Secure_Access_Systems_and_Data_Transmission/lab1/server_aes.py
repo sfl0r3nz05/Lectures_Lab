@@ -7,7 +7,7 @@ import binascii
 # Configuration
 HOST = '0.0.0.0'  # Listen on all available interfaces
 PORT = 8888
-KEY = binascii.unhexlify('00112233445566778899aabbccddeeff')  # AES key as specified
+KEY = binascii.unhexlify('00112233445566778899aabbccddeeff')  # Harcoding AES key is a bad practice
 
 # List of sample fortunes/messages
 FORTUNES = [

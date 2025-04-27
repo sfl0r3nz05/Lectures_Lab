@@ -34,8 +34,7 @@ def get_fortune(host, port):
         print("Connection closed")
 
 def main():
-    # Server details - use localhost for local testing
-    host = "127.0.0.1"  # Use your server's IP if not running locally
+    host = "127.0.0.1"  # Server's IP address
     port = 8888
     
     try:
