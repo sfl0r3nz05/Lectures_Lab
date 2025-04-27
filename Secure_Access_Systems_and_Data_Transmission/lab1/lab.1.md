@@ -10,6 +10,6 @@
 
 2. Encrypted files
 
-    - [Client Plain Text](client_plain_text.py)
-    - [Server Plain Text](server_plain_text.py)
+    - [Client Plain Text](client_aes.py)
+    - [Server Plain Text](server_aes.py)
     - [Wireshark capture](capture_aes.pcap)
