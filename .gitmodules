@@ -1,3 +1,3 @@
-[submodule "utils/KaliDockerGNS3"]
-	path = utils/KaliDockerGNS3
+[submodule "Telematic_Network_Desing/utils/KaliDockerGNS3"]
+	path = Telematic_Network_Desing/utils/KaliDockerGNS3
 	url = https://github.com/sfl0r3nz05/KaliDockerGNS3.git
