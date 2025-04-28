@@ -1,4 +1,4 @@
-# Lab 2: Python Hashing
+# Lab 3: Basic Network Communication and Hashing in Python
 
 > Lab 2: Python hashing demonstration.
 
