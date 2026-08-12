@@ -303,3 +303,29 @@ Confirm that syslog messages from R1 are being received and stored properly.
  Aug 11 16:25:58 192.168.1.50 25: *Aug 11 16:20:46.123: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up
  Aug 11 16:25:59 192.168.1.50 26: *Aug 11 16:20:47.456: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
  ```
+
+- Syslog transmission in action is captured using Wireshark
+
+    <img src="img/wireshark.png" width="600">
+
+- Analysis compartive 5424 Theory vs Actual capture
+ 
+  - Theory (From RFC 5424)
+ 
+   ```log
+   <PRI>TIMESTAMP HOSTNAME TAG CONTENT
+   <187>Aug 12 10:58:55 R1 Cisco-IOS: %LINK-3-UPDOWN...
+   ```
+ 
+  - Actual Capture (With Cisco Extensions)
+ 
+   ```log
+   <187>:: *Aug 12 10:58:55.071: %LINK-3-UPDOWN...
+   ```
+ 
+  - **Differences:**
+    - `::` prefix (Cisco-specific)
+    - `*` before timestamp (Cisco-specific)
+    - Milliseconds in timestamp (.071)
+    - Device-generated timestamp (not syslog server timestamp)
+    **Validation:** Despite Cisco extensions, message is still syslog-compatible and successfully received by rsyslog server.
