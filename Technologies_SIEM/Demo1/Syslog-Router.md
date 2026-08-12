@@ -52,17 +52,25 @@ This demonstration implements log collection architecture using:
 
     - Import appliance:
 
-        <img src="img/add-appliance.png" width="300">
+        <img src="img/add-appliance.png" width="500">
 
     - Drag device:
 
-        <img src="img/drag-appliance.png" width="300">
+        <img src="img/drag-appliance.png" width="500">
 
 - Cisco C7200 router image available
 
-    - Download dynamips from https://gns3.com/marketplace/appliances/networkers-toolkit
+    - Download dynamips from https://drive.google.com/file/d/1cQ3y24eMJ3SjwLWeAu_hxIsO51Y0CRHX/view?usp=sharing
 
-    - Import appliance:
+    - Select preferences:
 
-        ![](img/import-appliance.png) {width=100}
+        <img src="img/preferences.png" width="250">
+
+    - Import dynamips:
+
+        <img src="img/import-dynamips.png" width="500">
+
+    - Drag device:
+
+        <img src="img/drag-router.png" width="450">
 
