@@ -48,13 +48,13 @@ This demonstration implements log collection architecture using:
 
     - Import appliance:
 
-        ![](img/import-appliance.png) {width=100}
+        <img src="img/import-appliance.png" width="100">
 
-        ![](img/appliance.png) {width=100}
+        <img src="img/add-appliance.png" width="100">
 
     - Drag appliance
 
-        ![](img/drag-appliance.png) {width=100}
+        <img src="img/drag-appliance.png" width="100">
 
 - Cisco C7200 router image available
 
