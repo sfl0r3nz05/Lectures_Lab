@@ -46,15 +46,17 @@ This demonstration implements log collection architecture using:
 
     - Download appliance from https://gns3.com/marketplace/appliances/networkers-toolkit
 
+    - Select appliance:
+
+        <img src="img/import-appliance.png" width="200">
+
     - Import appliance:
 
-        <img src="img/import-appliance.png" width="100">
+        <img src="img/add-appliance.png" width="300">
 
-        <img src="img/add-appliance.png" width="100">
+    - Drag device:
 
-    - Drag appliance
-
-        <img src="img/drag-appliance.png" width="100">
+        <img src="img/drag-appliance.png" width="300">
 
 - Cisco C7200 router image available
 
