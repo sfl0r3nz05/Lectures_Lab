@@ -58,7 +58,7 @@ This demonstration implements log collection architecture using:
 
         <img src="img/drag-appliance.png" width="500">
 
-- Cisco C7200 router image available
+3. Cisco C7200 router image available
 
     - Download dynamips from https://drive.google.com/file/d/1cQ3y24eMJ3SjwLWeAu_hxIsO51Y0CRHX/view?usp=sharing
 
@@ -74,13 +74,15 @@ This demonstration implements log collection architecture using:
 
         <img src="img/drag-router.png" width="450">
 
-## INTERCONNECT INFRASTRUCTURE
+## INTERCONNECT AND RUN INFRASTRUCTURE
 
-1. Interconnect devices:
+1. Interconnect devices and run the project:
 
-    <img src="img/drag-router.png" width="450">
+    <img src="img/infrastructure.png" width="450">
 
-## STEP 1: CONFIGURE CENTRAL-SERVER INTERFACE
+## CONFIGURE INFRASTRUCTURE
+
+### STEP 1: CONFIGURE CENTRAL-SERVER INTERFACE
 
 Assign IPv4 address to Central-Server's eth0 interface so it can receive syslog messages from R1.
 
@@ -98,7 +100,7 @@ Assign IPv4 address to Central-Server's eth0 interface so it can receive syslog 
  root@Central-Server:~# ip a show eth0
  ```
 
-## STEP 2: CONFIGURE RSYSLOG SERVER
+### STEP 2: CONFIGURE RSYSLOG SERVER
 
 Enable rsyslog to listen on UDP/TCP port 514 and receive syslog messages from remote devices (R1).
 
@@ -156,7 +158,7 @@ Enable rsyslog to listen on UDP/TCP port 514 and receive syslog messages from re
  * Starting enhanced syslogd rsyslogd                                  [ OK ]
  ```
 
-## STEP 3: VERIFY RSYSLOG IS LISTENING
+### STEP 3: VERIFY RSYSLOG IS LISTENING
 
 Confirm rsyslog daemon is listening on UDP and TCP port 514.
 
@@ -175,7 +177,7 @@ Confirm rsyslog daemon is listening on UDP and TCP port 514.
  tcp     LISTEN   0        25                  [::]:514               [::]:*      users:(("rsyslogd",pid=336,fd=9))
  ```
 
-## STEP 4: CONFIGURE CISCO R1 NETWORK INTERFACE
+### STEP 4: CONFIGURE CISCO R1 NETWORK INTERFACE
 
 Enable FastEthernet0/0 interface on R1 and assign IP address so it can reach Central-Server.
 
@@ -222,7 +224,7 @@ Enable FastEthernet0/0 interface on R1 and assign IP address so it can reach Cen
  Success rate is 100 percent (5/5), round-trip min/avg/max = 16/28/36 ms
  ```
 
-## STEP 5: CONFIGURE CISCO R1 SYSLOG
+### STEP 5: CONFIGURE CISCO R1 SYSLOG
 
 Configure R1 to send log messages to Central-Server's rsyslog server.
 
@@ -254,7 +256,7 @@ Configure R1 to send log messages to Central-Server's rsyslog server.
                2 message lines logged
  ```
 
-## STEP 6: GENERATE TEST LOG MESSAGES
+### STEP 6: GENERATE TEST LOG MESSAGES
 
 Trigger log messages from R1 to verify they're being sent to Central-Server.
 
@@ -284,7 +286,7 @@ Trigger log messages from R1 to verify they're being sent to Central-Server.
  This generates:
   - `%SYS-5-CONFIG_I: Configured from console by console`
 
-## STEP 7: VERIFY LOG RECEIPT ON CENTRAL-SERVER
+### STEP 7: VERIFY LOG RECEIPT ON CENTRAL-SERVER
 
 Confirm that syslog messages from R1 are being received and stored properly.
 

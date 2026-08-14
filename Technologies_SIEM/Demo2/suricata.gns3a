@@ -1,0 +1,23 @@
+{
+    "appliance_id": "suricata-docker-jasonish",
+    "name": "Suricata IDS Docker",
+    "category": "guest",
+    "description": "Suricata IDS/IPS engine running in Docker container. Lightweight alternative to full Security Onion VM. Generates network security alerts compatible with SIEM log aggregation.",
+    "vendor_name": "Jason Ish / Suricata Project",
+    "vendor_url": "https://suricata.io/",
+    "vendor_logo_url": "https://suricata.io/wp-content/uploads/2020/01/suricata-logo-vector.png",
+    "documentation_url": "https://hub.docker.com/r/jasonish/suricata",
+    "product_name": "Suricata",
+    "product_url": "https://suricata.io/",
+    "registry_version": 4,
+    "status": "stable",
+    "maintainer": "Jason Ish",
+    "maintainer_email": "info@suricata.io",
+    "usage": "Suricata IDS/IPS engine for network security monitoring. Generates alerts in eve.json format. Can export alerts via syslog using Filebeat for SIEM integration.",
+    "docker": {
+        "image": "jasonish/suricata:latest",
+        "adapters": 1,
+        "console_type": "telnet",
+        "start_command": "suricata -i eth0 -c /etc/suricata/suricata.yaml"
+    }
+}
