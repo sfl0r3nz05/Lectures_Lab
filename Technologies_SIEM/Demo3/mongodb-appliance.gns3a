@@ -1,0 +1,31 @@
+{
+    "appliance_id": "mongodb-graylog",
+    "name": "MongoDB Graylog",
+    "category": "guest",
+    "description": "MongoDB database for Graylog configuration backend",
+    "vendor_name": "MongoDB",
+    "vendor_url": "https://www.mongodb.com/",
+    "documentation_url": "https://docs.mongodb.com/",
+    "product_name": "MongoDB",
+    "product_url": "https://hub.docker.com/_/mongo",
+    "registry_version": 4,
+    "status": "stable",
+    "maintainer": "GNS3",
+    "maintainer_email": "support@gns3.com",
+    "usage": "Connect to Graylog container. MongoDB listens on port 27017.",
+    "docker": {
+        "image": "mongo:3",
+        "adapters": 1,
+        "console_type": "none",
+        "start_command": "mongod --smallfiles --oplogSize 128",
+        "environment": "MONGO_INITDB_ROOT_USERNAME=admin\nMONGO_INITDB_ROOT_PASSWORD=admin"
+    },
+    "ports": [
+        {
+            "name": "MongoDB",
+            "port": 27017,
+            "port_type": "tcp",
+            "description": "MongoDB port"
+        }
+    ]
+}

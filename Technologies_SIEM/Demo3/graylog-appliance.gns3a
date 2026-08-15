@@ -1,0 +1,57 @@
+{
+    "appliance_id": "graylog-siem",
+    "name": "Graylog (SIEM)",
+    "category": "guest",
+    "description": "Graylog log aggregation, processing, and normalization engine with Elasticsearch integration",
+    "vendor_name": "Graylog",
+    "vendor_url": "https://www.graylog.org/",
+    "documentation_url": "https://docs.graylog.org/",
+    "product_name": "Graylog",
+    "product_url": "https://hub.docker.com/r/graylog/graylog",
+    "registry_version": 4,
+    "status": "stable",
+    "maintainer": "GNS3",
+    "maintainer_email": "support@gns3.com",
+    "usage": "Graylog receives syslog messages on port 1514 (UDP/TCP), processes them through Grok patterns and pipelines, and stores in Elasticsearch. Access web UI on port 9000. Dependencies: MongoDB (27017), Elasticsearch (9200).",
+    "docker": {
+        "image": "graylog/graylog:3.2",
+        "adapters": 1,
+        "console_type": "http",
+        "console_port": 9000,
+        "start_command": "",
+        "environment": "GRAYLOG_PASSWORD_SECRET=somepasswordpepper12345\nGRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918\nGRAYLOG_HTTP_EXTERNAL_URI=http://192.168.98.130:9000/\nGRAYLOG_ELASTICSEARCH_HOSTS=http://elasticsearch:9200\nGRAYLOG_MONGODB_URI=mongodb://admin:admin@mongo:27017/graylog",
+        "memory": 512
+    },
+    "ports": [
+        {
+            "name": "Web UI",
+            "port": 9000,
+            "port_type": "tcp",
+            "description": "Graylog web interface and REST API"
+        },
+        {
+            "name": "Syslog UDP",
+            "port": 1514,
+            "port_type": "udp",
+            "description": "Syslog input (UDP)"
+        },
+        {
+            "name": "Syslog TCP",
+            "port": 1514,
+            "port_type": "tcp",
+            "description": "Syslog input (TCP)"
+        },
+        {
+            "name": "GELF UDP",
+            "port": 12201,
+            "port_type": "udp",
+            "description": "GELF input (UDP)"
+        },
+        {
+            "name": "GELF TCP",
+            "port": 12201,
+            "port_type": "tcp",
+            "description": "GELF input (TCP)"
+        }
+    ]
+}
