@@ -11,51 +11,51 @@ This demonstration implements **log normalization and structured data extraction
 - **Graylog (GNS3 Docker Appliance)**: Log aggregation, processing, and normalization engine
 
 ### Three Normalization Steps
+
+*Step 1: Define Log Message Format*
+
+ ```
+ Raw Cisco Syslog:
+ Aug 11 16:25:57 192.168.1.50 24: *Aug 11 16:20:45.871: %SYS-5-CONFIG_I: Configured from console by console
+     
+     ├─ Timestamp: Aug 11 16:20:45.871
+     ├─ Severity: 5 (Notice)
+     ├─ Message Code: CONFIG_I
+     ├─ Details: "Configured from console by console"
+     └─ Source IP: 192.168.1.50
+ ```
  
-```
-Step 1: Define Log Message Format
-    ↓
-Raw Cisco Syslog:
-Aug 11 16:25:57 192.168.1.50 24: *Aug 11 16:20:45.871: %SYS-5-CONFIG_I: Configured from console by console
-    
-    ├─ Timestamp: Aug 11 16:20:45.871
-    ├─ Severity: 5 (Notice)
-    ├─ Message Code: CONFIG_I
-    ├─ Details: "Configured from console by console"
-    └─ Source IP: 192.168.1.50
+*Step 2: Create Grok Pattern*
+
+ ```
+ Grok pattern extracts fields:
+  
+ %{CISCO_SYSLOG_PATTERN}
+  
+ Extracts:
+   - timestamp
+   - device_ip
+   - severity_code
+   - message_code
+   - message_text
+   - event_type (normalized)
+ ```
  
-        ↓
+*Step 3: Create Message Processing Pipeline*
+
+ ```
+ Graylog Pipeline Processing:
+  
+ 1. Parse with Grok pattern
+ 2. Extract and enrich fields
+ 3. Normalize severity levels
+ 4. Classify event type
+ 5. Index structured data in Elasticsearch
  
-Step 2: Create Grok Pattern
-    ↓
-Grok pattern extracts fields:
- 
-%{CISCO_SYSLOG_PATTERN}
- 
-Extracts:
-  - timestamp
-  - device_ip
-  - severity_code
-  - message_code
-  - message_text
-  - event_type (normalized)
- 
-        ↓
- 
-Step 3: Create Message Processing Pipeline
-    ↓
-Graylog Pipeline Processing:
- 
-1. Parse with Grok pattern
-2. Extract and enrich fields
-3. Normalize severity levels
-4. Classify event type
-5. Index structured data in Elasticsearch
- 
-        ↓
- 
-Result: Normalized, Searchable, Visualizable Logs
-```
+         ↓
+  
+ Result: Normalized, Searchable, Visualizable Logs
+ ```
  
 ---
  
@@ -124,4 +124,4 @@ Result: Normalized, Searchable, Visualizable Logs
 
         <img src="img/import-appliance.png" width="200">
     
-    
+
