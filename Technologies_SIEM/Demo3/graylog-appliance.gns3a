@@ -1,6 +1,6 @@
 {
     "appliance_id": "graylog-siem",
-    "name": "Graylog (SIEM)",
+    "name": "Graylog SIEM",
     "category": "guest",
     "description": "Graylog log aggregation, processing, and normalization engine with Elasticsearch integration",
     "vendor_name": "Graylog",
@@ -16,11 +16,9 @@
     "docker": {
         "image": "graylog/graylog:3.2",
         "adapters": 1,
-        "console_type": "http",
-        "console_port": 9000,
+        "console_type": "telnet",
         "start_command": "",
-        "environment": "GRAYLOG_PASSWORD_SECRET=somepasswordpepper12345\nGRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918\nGRAYLOG_HTTP_EXTERNAL_URI=http://192.168.98.130:9000/\nGRAYLOG_ELASTICSEARCH_HOSTS=http://elasticsearch:9200\nGRAYLOG_MONGODB_URI=mongodb://admin:admin@mongo:27017/graylog",
-        "memory": 512
+        "environment": "GRAYLOG_PASSWORD_SECRET=somepasswordpepper12345\nGRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918\nGRAYLOG_HTTP_EXTERNAL_URI=http://192.168.98.130:9000/\nGRAYLOG_ELASTICSEARCH_HOSTS=http://elasticsearch:9200\nGRAYLOG_MONGODB_URI=mongodb://admin:admin@mongo:27017/graylog"
     },
     "ports": [
         {

@@ -16,7 +16,7 @@
     "docker": {
         "image": "mongo:3",
         "adapters": 1,
-        "console_type": "none",
+        "console_type": "telnet",
         "start_command": "mongod --smallfiles --oplogSize 128",
         "environment": "MONGO_INITDB_ROOT_USERNAME=admin\nMONGO_INITDB_ROOT_PASSWORD=admin"
     },

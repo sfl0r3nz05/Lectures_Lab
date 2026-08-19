@@ -116,12 +116,98 @@ This demonstration implements **log normalization and structured data extraction
 
         <img src="img/drag-router.png" width="450">
 
-4. MongoDB Graylog appliance
+3. MongoDB Graylog appliance
 
     - Download appliance from this repo: [mongodb-appliance.gns3a](./mongodb-appliance.gns3a)
 
-    - Select appliance:
+    - Select MongoDB appliance:
 
         <img src="img/import-appliance.png" width="200">
-    
 
+    - Open MogoDB Graylog appliance:
+
+        <img src="img/select-mongo-appliance.png" width="500">
+
+    - Install MogoDB Graylog appliance:
+
+        <img src="img/install-mongo-appliance.png" width="500">
+
+    - Installed MogoDB Graylog appliance:
+
+        <img src="img/installed-mongo-appliance.png" width="500">
+
+    - Drag MogoDB Graylog appliance and pulling image:
+
+        <img src="img/pull-mongodb-image-and-drag-appliance.png" width="500">
+
+    - MogoDB Graylog docker image pulling can be reflected:
+
+        <img src="img/graylog-registry.png" width="300">
+
+4. Graylog appliance
+
+    - Download appliance from this repo: [graylog-appliance.gns3a](./graylog-appliance.gns3a)
+
+    - Select Graylog appliance:
+
+        <img src="img/import-appliance.png" width="200">
+
+    - Open Graylog appliance:
+
+        <img src="img/select-graylog-appliance.png" width="500">
+
+    - Install Graylog appliance:
+
+        <img src="img/install-graylog-appliance.png" width="500">
+
+    - Installed Graylog appliance:
+
+        <img src="img/installed-graylog-appliance.png" width="500">
+
+    - Drag Graylog appliance and pulling image:
+
+        <img src="img/pull-graylog-image-and-drag-appliance.png" width="500">
+
+    - Graylog docker image pulling can be reflected:
+
+        <img src="img/graylog-registry.png" width="350">
+
+5.  Elasticsearch appliance
+
+    - Download appliance from this repo: [elasticsearch-appliance.gns3a](./elasticsearch-appliance.gns3a)
+
+    - Select Elasticsearch appliance:
+
+        <img src="img/import-appliance.png" width="200">
+
+    - Open Elasticsearch appliance:
+
+        <img src="img/select-elasticsearch-appliance.png" width="500">
+
+    - Install Graylog appliance:
+
+        <img src="img/install-elasticsearch-appliance.png" width="500">
+
+    - Installed Graylog appliance:
+
+        <img src="img/installed-elasticsearch-appliance.png" width="500">
+
+    - Drag Elasticsearch appliance and pulling image:
+
+        <img src="img/pull-elasticsearch-image-and-drag-appliance.png" width="500">
+
+    - Elasticsearch docker image pulling can be reflected:
+
+        <img src="img/elasticsearch-registry.png" width="350">
+
+6. Deploy Switch to interconnect devices:
+
+    - Drag Switch appliance:
+
+        <img src="img/switch-drag.png" width="500">
+
+## INTERCONNECT AND RUN INFRASTRUCTURE
+
+1. Interconnect devices and run the project:
+
+    <img src="img/infrastructure.png" width="450">

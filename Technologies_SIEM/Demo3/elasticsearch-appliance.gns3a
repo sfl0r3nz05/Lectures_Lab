@@ -1,6 +1,6 @@
 {
     "appliance_id": "elasticsearch-graylog",
-    "name": "Elasticsearch (Graylog)",
+    "name": "Elasticsearch Graylog",
     "category": "guest",
     "description": "Elasticsearch for Graylog log storage and indexing",
     "vendor_name": "Elastic",
@@ -16,10 +16,9 @@
     "docker": {
         "image": "docker.elastic.co/elasticsearch/elasticsearch-oss:6.8.5",
         "adapters": 1,
-        "console_type": "none",
+        "console_type": "telnet",
         "start_command": "",
-        "environment": "http.host=0.0.0.0\ntransport.host=localhost\nnetwork.host=0.0.0.0\nES_JAVA_OPTS=-Xms512m -Xmx512m\ndiscovery.type=single-node",
-        "memory": 1024
+        "environment": "http.host=0.0.0.0\ntransport.host=localhost\nnetwork.host=0.0.0.0\nES_JAVA_OPTS=-Xms512m -Xmx512m\ndiscovery.type=single-node"
     },
     "ports": [
         {
