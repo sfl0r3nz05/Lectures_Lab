@@ -18,7 +18,7 @@
         "adapters": 1,
         "console_type": "telnet",
         "start_command": "",
-        "environment": "GRAYLOG_PASSWORD_SECRET=somepasswordpepper12345\nGRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918\nGRAYLOG_HTTP_EXTERNAL_URI=http://192.168.98.130:9000/\nGRAYLOG_ELASTICSEARCH_HOSTS=http://elasticsearch:9200\nGRAYLOG_MONGODB_URI=mongodb://admin:admin@mongo:27017/graylog"
+        "environment": "GRAYLOG_PASSWORD_SECRET=somepasswordpepper12345\nGRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918\nGRAYLOG_HTTP_EXTERNAL_URI=http://192.168.98.130:9000/\nGRAYLOG_ELASTICSEARCH_HOSTS=http://192.168.42.12:9200\nGRAYLOG_HTTP_ENABLE_CORS=true\nGRAYLOG_MONGODB_URI=mongodb://admin:admin@192.168.42.10:27017/graylog"
     },
     "ports": [
         {
@@ -29,13 +29,13 @@
         },
         {
             "name": "Syslog UDP",
-            "port": 1514,
+            "port": 514,
             "port_type": "udp",
             "description": "Syslog input (UDP)"
         },
         {
             "name": "Syslog TCP",
-            "port": 1514,
+            "port": 514,
             "port_type": "tcp",
             "description": "Syslog input (TCP)"
         },

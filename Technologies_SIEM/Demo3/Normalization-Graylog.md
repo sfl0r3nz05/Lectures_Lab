@@ -210,4 +210,29 @@ This demonstration implements **log normalization and structured data extraction
 
 1. Interconnect devices and run the project:
 
-    <img src="img/infrastructure.png" width="450">
+    <img src="img/infrastructure.png" width="550">
+
+    <img src="img/infrastructurev2.png" width="550">
+
+2. CREATE USER IN GRAYLOG DATABASE
+
+ ```
+ docker exec -it GNS3.MongoDBGraylog.* bash
+
+ root@MongoDBGraylog:/# mongo -u admin -p admin --authenticationDatabase admin
+
+ > use graylog
+ switched to db graylog
+
+ > db.createUser({
+   user: "admin",
+   pwd: "admin",
+   roles: [{role: "readWrite", db: "graylog"}]
+ })
+
+ # Returns: Successfully added user
+
+ > exit
+
+ root@MongoDBGraylog:/# exit
+ ```
