@@ -180,7 +180,7 @@ This demonstration implements **log normalization and structured data extraction
 
         <img src="img/import-appliance.png" width="200">
 
-    - Open Elasticsearch appliance:
+    - Elasticsearch appliance:
 
         <img src="img/select-elasticsearch-appliance.png" width="500">
 
@@ -214,12 +214,48 @@ This demonstration implements **log normalization and structured data extraction
 
     <img src="img/infrastructurev2.png" width="550">
 
-2. CREATE USER IN GRAYLOG DATABASE
+2. Configure R1
 
+ ```bash
+ R1# configure terminal
+ R1(config)# interface FastEthernet0/0
+ R1(config-if)# ip address 192.168.42.50 255.255.255.0
+ R1(config-if)# no shutdown
+ R1(config-if)# end
+
+ R1# ping 192.168.42.1
  ```
+
+3. Configure MONGODB Container
+
+ ```bash
  docker exec -it GNS3.MongoDBGraylog.* bash
 
- root@MongoDBGraylog:/# mongo -u admin -p admin --authenticationDatabase admin
+ root@MongoDBGraylog:/# cat > /etc/network/interfaces << 'EOF'
+ auto eth0
+ iface eth0 inet static
+     address 192.168.42.10
+     netmask 255.255.255.0
+     gateway 192.168.42.1
+     up echo nameserver 192.168.42.1 > /etc/resolv.conf
+ EOF
+
+ root@MongoDBGraylog:/# cat > /etc/hosts << 'EOF'
+ 127.0.0.1       localhost
+ 192.168.42.10   mongo
+ 192.168.42.11   graylog
+ 192.168.42.12   elasticsearch
+ EOF
+ 
+ root@MongoDBGraylog:/# exit
+ ```
+
+4. Create User in GRAYLOG DATABASE
+
+ ```bash
+ docker exec -it GNS3.MongoDBGraylog.* bash
+
+ root@MongoDBGraylog:/# mongosh -u admin -p admin --authenticationDatabase admin
 
  > use graylog
  switched to db graylog
@@ -235,4 +271,52 @@ This demonstration implements **log normalization and structured data extraction
  > exit
 
  root@MongoDBGraylog:/# exit
+ ```
+
+5. Configure Graylog Container
+
+ ```bash
+ docker exec -it GNS3.GraylogSIEM.* bash
+
+ root@GraylogSIEM:/# cat > /etc/network/interfaces << 'EOF'
+ auto eth0
+ iface eth0 inet static
+     address 192.168.42.11
+     netmask 255.255.255.0
+     gateway 192.168.42.1
+     up echo nameserver 192.168.42.1 > /etc/resolv.conf
+ EOF
+ 
+ root@GraylogSIEM:/# cat > /etc/hosts << 'EOF'
+ 127.0.0.1       localhost
+ 192.168.42.10   mongo
+ 192.168.42.11   graylog
+ 192.168.42.12   elasticsearch
+ EOF
+ 
+ root@GraylogSIEM:/# exit
+ ```
+
+6. Configure ELASTICSEARCH Container
+
+ ```bash
+ docker exec -it GNS3.ElasticsearchGraylog.* bash
+
+ root@ElasticsearchGraylog:/# cat > /etc/network/interfaces << 'EOF'
+ auto eth0
+ iface eth0 inet static
+     address 192.168.42.12
+     netmask 255.255.255.0
+     gateway 192.168.42.1
+     up echo nameserver 192.168.42.1 > /etc/resolv.conf
+ EOF
+ 
+ root@ElasticsearchGraylog:/# cat > /etc/hosts << 'EOF'
+ 127.0.0.1       localhost
+ 192.168.42.10   mongo
+ 192.168.42.11   graylog
+ 192.168.42.12   elasticsearch
+ EOF
+ 
+ root@ElasticsearchGraylog:/# exit
  ```
