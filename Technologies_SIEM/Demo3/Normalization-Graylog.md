@@ -100,7 +100,13 @@ This demonstration implements **log normalization and structured data extraction
 
 1. GNS3 installed and running
 
-2. Cisco C7200 router image available
+2. Drag Virtual Switch to canvas:
+
+    - Drag Switch appliance:
+
+        <img src="img/switch-drag.png" width="500">
+
+3. Drag Cisco C7200 (R1) to canvas:
 
     - Download dynamips from https://drive.google.com/file/d/1cQ3y24eMJ3SjwLWeAu_hxIsO51Y0CRHX/view?usp=sharing
 
@@ -116,7 +122,7 @@ This demonstration implements **log normalization and structured data extraction
 
         <img src="img/drag-router.png" width="450">
 
-3. MongoDB Graylog appliance
+4. Drag MongoDB appliance to canvas:
 
     - Download appliance from this repo: [mongodb-appliance.gns3a](./mongodb-appliance.gns3a)
 
@@ -144,35 +150,7 @@ This demonstration implements **log normalization and structured data extraction
 
         <img src="img/graylog-registry.png" width="300">
 
-4. Graylog appliance
-
-    - Download appliance from this repo: [graylog-appliance.gns3a](./graylog-appliance.gns3a)
-
-    - Select Graylog appliance:
-
-        <img src="img/import-appliance.png" width="200">
-
-    - Open Graylog appliance:
-
-        <img src="img/select-graylog-appliance.png" width="500">
-
-    - Install Graylog appliance:
-
-        <img src="img/install-graylog-appliance.png" width="500">
-
-    - Installed Graylog appliance:
-
-        <img src="img/installed-graylog-appliance.png" width="500">
-
-    - Drag Graylog appliance and pulling image:
-
-        <img src="img/pull-graylog-image-and-drag-appliance.png" width="500">
-
-    - Graylog docker image pulling can be reflected:
-
-        <img src="img/graylog-registry.png" width="350">
-
-5.  Elasticsearch appliance
+5. Drag Elasticsearch appliance to canvas:
 
     - Download appliance from this repo: [elasticsearch-appliance.gns3a](./elasticsearch-appliance.gns3a)
 
@@ -200,11 +178,33 @@ This demonstration implements **log normalization and structured data extraction
 
         <img src="img/elasticsearch-registry.png" width="350">
 
-6. Deploy Switch to interconnect devices:
+6. Drag Graylog appliance to canvas:
 
-    - Drag Switch appliance:
+    - Download appliance from this repo: [graylog-appliance.gns3a](./graylog-appliance.gns3a)
 
-        <img src="img/switch-drag.png" width="500">
+    - Select Graylog appliance:
+
+        <img src="img/import-appliance.png" width="200">
+
+    - Open Graylog appliance:
+
+        <img src="img/select-graylog-appliance.png" width="500">
+
+    - Install Graylog appliance:
+
+        <img src="img/install-graylog-appliance.png" width="500">
+
+    - Installed Graylog appliance:
+
+        <img src="img/installed-graylog-appliance.png" width="500">
+
+    - Drag Graylog appliance and pulling image:
+
+        <img src="img/pull-graylog-image-and-drag-appliance.png" width="500">
+
+    - Graylog docker image pulling can be reflected:
+
+        <img src="img/graylog-registry.png" width="350">
 
 ## INTERCONNECT AND RUN INFRASTRUCTURE
 
