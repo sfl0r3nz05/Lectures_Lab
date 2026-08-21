@@ -252,9 +252,6 @@ This demonstration implements **log normalization and structured data extraction
  R1(config)# logging 192.168.42.11
  R1(config)# logging trap informational
  R1(config)# end
- 
- R1# show logging
- # Verify logging is configured
 
  R1# show logging
  # Output should show:
@@ -312,34 +309,7 @@ This demonstration implements **log normalization and structured data extraction
  root@MongoDBGraylog:/# exit
  ```
 
-5. Configure Graylog Container
-
- ```bash
- docker exec -it GNS3.GraylogSIEM.* bash
-
- root@GraylogSIEM:/# cat > /etc/network/interfaces << 'EOF'
- auto eth0
- iface eth0 inet static
-     address 192.168.42.11
-     netmask 255.255.255.0
-     gateway 192.168.42.1
-     up echo nameserver 192.168.42.1 > /etc/resolv.conf
- EOF
- 
- root@GraylogSIEM:/# cat > /etc/hosts << 'EOF'
- 127.0.0.1       localhost
- 192.168.42.10   mongo
- 192.168.42.11   graylog
- 192.168.42.12   elasticsearch
- EOF
- 
- root@GraylogSIEM:/# exit
-
- # Restart to apply network changes
- docker restart GNS3.GraylogSIEM.* 
- ```
-
-6. Configure ELASTICSEARCH Container
+5. Configure ELASTICSEARCH Container
 
  ```bash
  docker exec -it GNS3.ElasticsearchGraylog.* bash
@@ -364,6 +334,33 @@ This demonstration implements **log normalization and structured data extraction
 
  # Restart to apply network changes
  docker restart GNS3.ElasticsearchGraylog.*
+ ```
+
+6. Configure Graylog Container
+
+ ```bash
+ docker exec -it GNS3.GraylogSIEM.* bash
+
+ root@GraylogSIEM:/# cat > /etc/network/interfaces << 'EOF'
+ auto eth0
+ iface eth0 inet static
+     address 192.168.42.11
+     netmask 255.255.255.0
+     gateway 192.168.42.1
+     up echo nameserver 192.168.42.1 > /etc/resolv.conf
+ EOF
+ 
+ root@GraylogSIEM:/# cat > /etc/hosts << 'EOF'
+ 127.0.0.1       localhost
+ 192.168.42.10   mongo
+ 192.168.42.11   graylog
+ 192.168.42.12   elasticsearch
+ EOF
+ 
+ root@GraylogSIEM:/# exit
+
+ # Restart to apply network changes
+ docker restart GNS3.GraylogSIEM.* 
  ```
 
 ---
@@ -392,11 +389,7 @@ This demonstration implements **log normalization and structured data extraction
 
  ```json
  {
-   "id": "6a881b9f61f3b7006584019c",
-   "title": "Router Syslog",
-   "type": "SyslogUDPInput",
-   "status": "RUNNING"
- }
+   "id": "6a881b9f61f3b7006584019c"}
  ```
 
 2. Generate test Messages
@@ -410,77 +403,255 @@ This demonstration implements **log normalization and structured data extraction
  R1(config-if)# end
  ```
 
-3. Verify Message Collection
+3. Message monitored by Wireshark:
 
+ <img src="img/wireshark.png" width="900">
+
+4. Verify Messages in Elasticsearch
+ 
  ```bash
- # Check Elasticsearch
- curl -s "http://192.168.42.12:9200/graylog_0/_count" | jq '.count'
- # Should return > 0
-
- # Check actual message content
- curl -s "http://192.168.42.12:9200/graylog_0/_search?size=1" | \
-   jq '.hits.hits[0]._source.message'
+ gns3@gns3vm:~$ curl -s "http://192.168.42.12:9200/graylog_0/_count" | jq '.count'
+ 2
   
- # Example output:
- # "%SYS-6-LOGGINGHOST_STARTSTOP: Logging to host 192.168.42.11 port 514 started - CLI initiated"
+ gns3@gns3vm:~$ curl -s "http://192.168.42.12:9200/graylog_0/_search?size=10" | \
+   jq '.hits.hits[] | {message: ._source.message, timestamp: ._source.timestamp}'
+  
+ [
+   {
+     "message": "%LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up",
+     "timestamp": "2026-08-21 12:54:52.651"
+   },
+   {
+     "message": "%SYS-5-CONFIG_I: Configured from console by console",
+     "timestamp": "2026-08-21 12:41:29.967"
+   }
+ ]
  ```
 
 ---
  
 ## LOG NORMALIZATION
 
-1. Create a Grok pattern to extract structured fields from raw Cisco syslog:
- 
- ```grok
- %%%{DATA:message_code}: %{GREEDYDATA:message_text}
- ```
+> Normalization is converting **unstructured syslog text** into **structured, searchable fields**.
 
- **Pattern Breakdown:**
- - `%%%` - Matches literal percent signs (%%%)
- - `%{DATA:message_code}` - Captures characters until colon (e.g., "SYS-6-CONFIG_I")
- - `: ` - Matches literal colon and space
- - `%{GREEDYDATA:message_text}` - Captures remainder of message
- **Example Application:**
+1. Real Message Example
  
+ **Actual message from R1:**
  ```
- Raw:      %SYS-5-CONFIG_I: Configured from console by console
- Pattern:  %%%{DATA:message_code}: %{GREEDYDATA:message_text}
- 
- Extracted:
-   message_code = "SYS-5-CONFIG_I"
-   message_text = "Configured from console by console"
- ```
-
-2. Severity Level Normalization: Map numeric severity codes to human-readable names:
- 
- ```json
- {
-   "0": "Emergency",
-   "1": "Alert",
-   "2": "Critical",
-   "3": "Error",
-   "4": "Warning",
-   "5": "Notice",
-   "6": "Informational",
-   "7": "Debug"
- }
- ```
+ Raw: "%SYS-5-CONFIG_I: Configured from console by console"
   
- **Example:**
- - Raw: `"level": 6`
- - Normalized: `"severity_name": "Informational"`
+ Components:
+ ├─ Facility: SYS (System)
+ ├─ Severity: 5 (Notice)
+ ├─ Code: CONFIG_I (Configuration event)
+ └─ Text: "Configured from console by console"
+ ```
 
-3. Event Type Classification. Parse message code to determine event type:
+2. Add Normalization Static Fields
  
  ```bash
- Message Code: SYS-5-CONFIG_I
- ├─ SYS = System component
- ├─ 5 = Severity (Notice)
- └─ CONFIG_I = Configuration change event
+ # Get your syslog input ID
+ INPUT_ID="6a884674eadb5a0065e66a6b"
   
- Normalized Classification:
- ├─ event_component = "System"
- ├─ event_severity = "Notice"
- ├─ event_type = "Configuration Change"
- └─ is_critical = false
+ # Add normalized fields
+ curl -X POST http://192.168.42.11:9000/api/system/inputs/$INPUT_ID/staticfields \
+   -u admin:admin \
+   -H "Content-Type: application/json" \
+   -H "X-Requested-By: cli" \
+   -d '{"key":"message_code","value":"SYS-5-CONFIG_I"}'
+  
+ curl -X POST http://192.168.42.11:9000/api/system/inputs/$INPUT_ID/staticfields \
+   -u admin:admin \
+   -H "Content-Type: application/json" \
+   -H "X-Requested-By: cli" \
+   -d '{"key":"event_type","value":"Configuration Change"}'
+  
+ curl -X POST http://192.168.42.11:9000/api/system/inputs/$INPUT_ID/staticfields \
+   -u admin:admin \
+   -H "Content-Type: application/json" \
+   -H "X-Requested-By: cli" \
+   -d '{"key":"event_severity","value":"Notice"}'
+  
+ curl -X POST http://192.168.42.11:9000/api/system/inputs/$INPUT_ID/staticfields \
+   -u admin:admin \
+   -H "Content-Type: application/json" \
+   -H "X-Requested-By: cli" \
+   -d '{"key":"event_component","value":"System"}'
+  
+ curl -X POST http://192.168.42.11:9000/api/system/inputs/$INPUT_ID/staticfields \
+   -u admin:admin \
+   -H "Content-Type: application/json" \
+   -H "X-Requested-By: cli" \
+   -d '{"key":"is_security_relevant","value":"true"}'
+ ```
+
+3. Verify Normalized Message
+ 
+ ```bash
+ # Generate new message on R1
+ R1# configure terminal
+ R1(config)# interface FastEthernet0/0
+ R1(config-if)# shutdown
+ R1(config-if)# no shutdown
+ R1(config-if)# end
+  
+ # Wait 5 seconds, then check
+ curl -s "http://192.168.42.12:9200/graylog_0/_search?size=1&sort=timestamp:desc" | \
+   jq '.hits.hits[0]._source | {message, message_code, event_type, event_severity, event_component, is_security_relevant, source, timestamp}'
+ ```
+  
+ **Result (NORMALIZED MESSAGE):**
+ ```json
+ {
+   "message": "%LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up",
+   "message_code": "SYS-5-CONFIG_I",
+   "event_type": "Configuration Change",
+   "event_severity": "Notice",
+   "event_component": "System",
+   "is_security_relevant": "true",
+   "source": "192.168.42.50",
+   "timestamp": "2026-08-21 12:54:52.651"
+ }
+ ```
+
+---
+ 
+## STREAM-BASED CLASSIFICATION
+ 
+> Create Classification Streams
+ 
+1. Link State Changes
+ 
+ ```bash
+ # Create stream
+ curl -X POST http://192.168.42.11:9000/api/streams \
+   -u admin:admin \
+   -H "Content-Type: application/json" \
+   -H "X-Requested-By: cli" \
+   -d '{
+     "title": "Link State Changes",
+     "description": "LINK-3-UPDOWN interface events",
+     "index_set_id": "6a88255461f3b7006eee6806"
+   }'
+  
+ # Save returned stream ID: 6a882eef61f3b700718db04c
+  
+ # Add rule
+ curl -X POST http://192.168.42.11:9000/api/streams/6a882eef61f3b700718db04c/rules \
+   -u admin:admin \
+   -H "Content-Type: application/json" \
+   -H "X-Requested-By: cli" \
+   -d '{
+     "type": 6,
+     "field": "message",
+     "value": "LINK",
+     "inverted": false
+   }'
+ ```
+  
+2. Configuration Changes
+  
+ ```bash
+ curl -X POST http://192.168.42.11:9000/api/streams \
+   -u admin:admin \
+   -H "Content-Type: application/json" \
+   -H "X-Requested-By: cli" \
+   -d '{
+     "title": "Configuration Changes",
+     "description": "CONFIG_I events",
+     "index_set_id": "6a88255461f3b7006eee6806"
+   }'
+  
+ # Save ID: 6a882bd161f3b7006eee6fdf
+  
+ curl -X POST http://192.168.42.11:9000/api/streams/6a882bd161f3b7006eee6fdf/rules \
+   -u admin:admin \
+   -H "Content-Type: application/json" \
+   -H "X-Requested-By: cli" \
+   -d '{
+     "type": 6,
+     "field": "message",
+     "value": "CONFIG",
+     "inverted": false
+   }'
+ ```
+  
+3. Protocol State Changes
+  
+ ```bash
+ curl -X POST http://192.168.42.11:9000/api/streams \
+   -u admin:admin \
+   -H "Content-Type: application/json" \
+   -H "X-Requested-By: cli" \
+   -d '{
+     "title": "Protocol State Changes",
+     "description": "LINEPROTO-5-UPDOWN events",
+     "index_set_id": "6a88255461f3b7006eee6806"
+   }'
+  
+ # Save ID: 6a882f0061f3b700718db061
+  
+ curl -X POST http://192.168.42.11:9000/api/streams/6a882f0061f3b700718db061/rules \
+   -u admin:admin \
+   -H "Content-Type: application/json" \
+   -H "X-Requested-By: cli" \
+   -d '{
+     "type": 6,
+     "field": "message",
+     "value": "LINEPROTO",
+     "inverted": false
+   }'
+ ```
+ 
+4. Verify All Streams
+ 
+ ```bash
+ curl -s http://192.168.42.11:9000/api/streams -u admin:admin | \
+   jq '.streams[] | select(.disabled==true) | {title, rule_value: .rules[0].value}'
+  
+ # Output:
+ # {
+ #   "title": "Link State Changes",
+ #   "rule_value": "LINK"
+ # }
+ # {
+ #   "title": "Configuration Changes",
+ #   "rule_value": "CONFIG"
+ # }
+ # {
+ #   "title": "Protocol State Changes",
+ #   "rule_value": "LINEPROTO"
+ # }
+ ```
+
+## OPERATIONAL VERIFICATION
+ 
+1. System Health Checks
+ 
+ ```bash
+ # 1. Graylog health
+ curl -s http://192.168.42.11:9000/api/system/overview -u admin:admin | \
+   jq '.lifecycle'
+ # Should return: "RUNNING"
+  
+ # 2. Elasticsearch cluster
+ curl -s http://192.168.42.12:9200/_cluster/health | \
+   jq '{status, active_shards}'
+ # {
+ #   "status": "green",
+ #   "active_shards": 12
+ # }
+  
+ # 3. Syslog input
+ curl -s http://192.168.42.11:9000/api/system/inputs -u admin:admin | \
+   jq '.inputs[] | {title, type, state}'
+ # {
+ #   "title": "Router Syslog",
+ #   "type": "SyslogUDPInput",
+ #   "state": "RUNNING"
+ # }
+  
+ # 4. Message count
+ curl -s "http://192.168.42.12:9200/graylog_0/_count" | jq '.count'
+ # 2+
  ```
