@@ -212,8 +212,6 @@ This demonstration implements **log normalization and structured data extraction
 
     <img src="img/infrastructure.png" width="550">
 
-    <img src="img/infrastructurev2.png" width="550">
-
 2. Configure R1
 
  ```bash
