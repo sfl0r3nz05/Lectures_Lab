@@ -320,3 +320,21 @@ This demonstration implements **log normalization and structured data extraction
  
  root@ElasticsearchGraylog:/# exit
  ```
+
+## GENERATE SYSLOG
+
+1. Generate test
+
+ ```bash
+ # Generate test event on R1
+ R1# configure terminal
+ R1(config)# interface FastEthernet0/0
+ R1(config-if)# shutdown
+ R1(config-if)# no shutdown
+ R1(config-if)# end
+
+ # Check Elasticsearch
+ sleep 5
+ curl -s "http://192.168.42.12:9200/graylog_0/_count" | jq '.count'
+ # Should return > 0
+ ```
