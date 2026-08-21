@@ -226,7 +226,19 @@ This demonstration implements **log normalization and structured data extraction
  R1# ping 192.168.42.1
  ```
 
-3. Configure MONGODB Container
+3. Configure R1 Syslog
+
+ ```bash
+ R1# configure terminal
+ R1(config)# logging 192.168.42.11
+ R1(config)# logging trap informational
+ R1(config)# end
+ 
+ R1# show logging
+ # Should show: Logging to 192.168.42.11 (udp port 514)
+ ```
+
+4. Configure MONGODB Container
 
  ```bash
  docker exec -it GNS3.MongoDBGraylog.* bash
@@ -250,12 +262,12 @@ This demonstration implements **log normalization and structured data extraction
  root@MongoDBGraylog:/# exit
  ```
 
-4. Create User in GRAYLOG DATABASE
+5. Create User in GRAYLOG DATABASE
 
  ```bash
  docker exec -it GNS3.MongoDBGraylog.* bash
 
- root@MongoDBGraylog:/# mongosh -u admin -p admin --authenticationDatabase admin
+ root@MongoDBGraylog:/# mongo -u admin -p admin --authenticationDatabase admin
 
  > use graylog
  switched to db graylog
@@ -273,7 +285,7 @@ This demonstration implements **log normalization and structured data extraction
  root@MongoDBGraylog:/# exit
  ```
 
-5. Configure Graylog Container
+6. Configure Graylog Container
 
  ```bash
  docker exec -it GNS3.GraylogSIEM.* bash
@@ -297,7 +309,7 @@ This demonstration implements **log normalization and structured data extraction
  root@GraylogSIEM:/# exit
  ```
 
-6. Configure ELASTICSEARCH Container
+7. Configure ELASTICSEARCH Container
 
  ```bash
  docker exec -it GNS3.ElasticsearchGraylog.* bash
@@ -323,7 +335,25 @@ This demonstration implements **log normalization and structured data extraction
 
 ## GENERATE SYSLOG
 
-1. Generate test
+1. Generate Syslog Input on Port 514
+
+ ```bash
+ curl -X POST http://192.168.42.11:9000/api/system/inputs \
+  -u admin:admin \
+  -H "Content-Type: application/json" \
+  -H "X-Requested-By: cli" \
+  -d '{
+    "title": "Router Syslog",
+    "type": "org.graylog2.inputs.syslog.udp.SyslogUDPInput",
+    "global": true,
+    "configuration": {
+      "bind_address": "0.0.0.0",
+      "port": 514
+    }
+  }'
+ ```
+
+2. Generate test
 
  ```bash
  # Generate test event on R1
@@ -334,7 +364,9 @@ This demonstration implements **log normalization and structured data extraction
  R1(config-if)# end
 
  # Check Elasticsearch
- sleep 5
  curl -s "http://192.168.42.12:9200/graylog_0/_count" | jq '.count'
  # Should return > 0
+
+ curl -s "http://192.168.42.12:9200/graylog_0/_search?size=1" | jq '.hits.hits[0]._source.message'
+ # Should show the syslog message
  ```

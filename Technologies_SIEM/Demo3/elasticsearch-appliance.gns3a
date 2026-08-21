@@ -14,11 +14,11 @@
     "maintainer_email": "support@gns3.com",
     "usage": "Connect to Graylog container. Elasticsearch listens on port 9200 (HTTP) and 9300 (node communication).",
     "docker": {
-        "image": "docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2",
+        "image": "docker.elastic.co/elasticsearch/elasticsearch-oss:6.8.5",
         "adapters": 1,
         "console_type": "telnet",
         "start_command": "",
-        "environment": "http.host=0.0.0.0\ntransport.host=localhost\nnetwork.host=0.0.0.0\nES_JAVA_OPTS=-Xms512m -Xmx512m\ndiscovery.type=single-node\ncluster.initial_master_nodes=ElasticsearchGraylog"
+        "environment": "http.host=0.0.0.0\ntransport.host=localhost\nnetwork.host=0.0.0.0\nES_JAVA_OPTS=-Xms512m -Xmx512m\ndiscovery.type=single-node"
     },
     "ports": [
         {

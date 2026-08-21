@@ -14,7 +14,7 @@
     "maintainer_email": "support@gns3.com",
     "usage": "Graylog receives syslog messages on port 1514 (UDP/TCP), processes them through Grok patterns and pipelines, and stores in Elasticsearch. Access web UI on port 9000. Dependencies: MongoDB (27017), Elasticsearch (9200).",
     "docker": {
-        "image": "graylog/graylog:6.3.15",
+        "image": "graylog/graylog:3.2",
         "adapters": 1,
         "console_type": "telnet",
         "start_command": "",
