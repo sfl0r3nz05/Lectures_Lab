@@ -210,9 +210,27 @@ This demonstration implements **log normalization and structured data extraction
 
 1. Interconnect devices and run the project:
 
+    - Connect R1 interface f0/0 → Switch
+    - Connect GraylogSIEM eth0 → Switch
+    - Connect ElasticsearchGraylog eth0 → Switch
+    - Connect MongoDBGraylog eth0 → Switch
+
     <img src="img/infrastructure.png" width="550">
 
-2. Configure R1
+2. Start Infrastructure
+ 
+ - Right-click project → Start all nodes
+ - Wait 2-3 minutes for containers to initialize
+ - Verify Docker containers running:
+   
+ ```bash
+ docker ps
+ # Should show: graylog, elasticsearch-oss, mongo
+ ```
+
+## CONFIGURATION STEPS
+
+1. Configure R1
 
  ```bash
  R1# configure terminal
@@ -221,10 +239,13 @@ This demonstration implements **log normalization and structured data extraction
  R1(config-if)# no shutdown
  R1(config-if)# end
 
+ R1(config)# ip route 0.0.0.0 0.0.0.0 192.168.42.1
+ R1(config)# end
+
  R1# ping 192.168.42.1
  ```
 
-3. Configure R1 Syslog
+2. Configure R1 Syslog
 
  ```bash
  R1# configure terminal
@@ -233,10 +254,15 @@ This demonstration implements **log normalization and structured data extraction
  R1(config)# end
  
  R1# show logging
- # Should show: Logging to 192.168.42.11 (udp port 514)
+ # Verify logging is configured
+
+ R1# show logging
+ # Output should show:
+ # Trap logging: level informational, 45 message lines logged
+ #     Logging to 192.168.42.11 (udp port 514)
  ```
 
-4. Configure MONGODB Container
+3. Configure MONGODB Container
 
  ```bash
  docker exec -it GNS3.MongoDBGraylog.* bash
@@ -258,9 +284,12 @@ This demonstration implements **log normalization and structured data extraction
  EOF
  
  root@MongoDBGraylog:/# exit
+
+ # Restart to apply network changes
+ docker restart GNS3.MongoDBGraylog.*
  ```
 
-5. Create User in GRAYLOG DATABASE
+4. Create User in GRAYLOG DATABASE
 
  ```bash
  docker exec -it GNS3.MongoDBGraylog.* bash
@@ -283,7 +312,7 @@ This demonstration implements **log normalization and structured data extraction
  root@MongoDBGraylog:/# exit
  ```
 
-6. Configure Graylog Container
+5. Configure Graylog Container
 
  ```bash
  docker exec -it GNS3.GraylogSIEM.* bash
@@ -305,9 +334,12 @@ This demonstration implements **log normalization and structured data extraction
  EOF
  
  root@GraylogSIEM:/# exit
+
+ # Restart to apply network changes
+ docker restart GNS3.GraylogSIEM.* 
  ```
 
-7. Configure ELASTICSEARCH Container
+6. Configure ELASTICSEARCH Container
 
  ```bash
  docker exec -it GNS3.ElasticsearchGraylog.* bash
@@ -329,11 +361,16 @@ This demonstration implements **log normalization and structured data extraction
  EOF
  
  root@ElasticsearchGraylog:/# exit
+
+ # Restart to apply network changes
+ docker restart GNS3.ElasticsearchGraylog.*
  ```
 
-## GENERATE SYSLOG
+---
 
-1. Generate Syslog Input on Port 514
+## LOG COLLECTION
+
+1. Create a UDP syslog input on Graylog to receive messages from R1:
 
  ```bash
  curl -X POST http://192.168.42.11:9000/api/system/inputs \
@@ -351,7 +388,18 @@ This demonstration implements **log normalization and structured data extraction
   }'
  ```
 
-2. Generate test
+ **Response:**
+
+ ```json
+ {
+   "id": "6a881b9f61f3b7006584019c",
+   "title": "Router Syslog",
+   "type": "SyslogUDPInput",
+   "status": "RUNNING"
+ }
+ ```
+
+2. Generate test Messages
 
  ```bash
  # Generate test event on R1
@@ -360,11 +408,79 @@ This demonstration implements **log normalization and structured data extraction
  R1(config-if)# shutdown
  R1(config-if)# no shutdown
  R1(config-if)# end
+ ```
 
+3. Verify Message Collection
+
+ ```bash
  # Check Elasticsearch
  curl -s "http://192.168.42.12:9200/graylog_0/_count" | jq '.count'
  # Should return > 0
 
- curl -s "http://192.168.42.12:9200/graylog_0/_search?size=1" | jq '.hits.hits[0]._source.message'
- # Should show the syslog message
+ # Check actual message content
+ curl -s "http://192.168.42.12:9200/graylog_0/_search?size=1" | \
+   jq '.hits.hits[0]._source.message'
+  
+ # Example output:
+ # "%SYS-6-LOGGINGHOST_STARTSTOP: Logging to host 192.168.42.11 port 514 started - CLI initiated"
+ ```
+
+---
+ 
+## LOG NORMALIZATION
+
+1. Create a Grok pattern to extract structured fields from raw Cisco syslog:
+ 
+ ```grok
+ %%%{DATA:message_code}: %{GREEDYDATA:message_text}
+ ```
+
+ **Pattern Breakdown:**
+ - `%%%` - Matches literal percent signs (%%%)
+ - `%{DATA:message_code}` - Captures characters until colon (e.g., "SYS-6-CONFIG_I")
+ - `: ` - Matches literal colon and space
+ - `%{GREEDYDATA:message_text}` - Captures remainder of message
+ **Example Application:**
+ 
+ ```
+ Raw:      %SYS-5-CONFIG_I: Configured from console by console
+ Pattern:  %%%{DATA:message_code}: %{GREEDYDATA:message_text}
+ 
+ Extracted:
+   message_code = "SYS-5-CONFIG_I"
+   message_text = "Configured from console by console"
+ ```
+
+2. Severity Level Normalization: Map numeric severity codes to human-readable names:
+ 
+ ```json
+ {
+   "0": "Emergency",
+   "1": "Alert",
+   "2": "Critical",
+   "3": "Error",
+   "4": "Warning",
+   "5": "Notice",
+   "6": "Informational",
+   "7": "Debug"
+ }
+ ```
+  
+ **Example:**
+ - Raw: `"level": 6`
+ - Normalized: `"severity_name": "Informational"`
+
+3. Event Type Classification. Parse message code to determine event type:
+ 
+ ```bash
+ Message Code: SYS-5-CONFIG_I
+ ├─ SYS = System component
+ ├─ 5 = Severity (Notice)
+ └─ CONFIG_I = Configuration change event
+  
+ Normalized Classification:
+ ├─ event_component = "System"
+ ├─ event_severity = "Notice"
+ ├─ event_type = "Configuration Change"
+ └─ is_critical = false
  ```
