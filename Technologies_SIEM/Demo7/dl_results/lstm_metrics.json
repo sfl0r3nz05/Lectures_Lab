@@ -1,0 +1,49 @@
+{
+  "n_sequences": 59956,
+  "n_normal": 50848,
+  "n_attack": 9108,
+  "roc_auc": 0.8936,
+  "avg_precision": 0.8438,
+  "precision": 0.9136,
+  "recall": 0.7398,
+  "f1_score": 0.8176,
+  "fpr": 0.0125,
+  "fnr": 0.2602,
+  "tp": 6738,
+  "fp": 637,
+  "tn": 50211,
+  "fn": 2370,
+  "threshold": 0.193413,
+  "per_type": {
+    "mitm_unaltered": {
+      "n": 6134,
+      "detected": 5308,
+      "recall": 0.8653407238343658,
+      "fpr": NaN
+    },
+    "normal": {
+      "n": 50848,
+      "detected": 637,
+      "recall": NaN,
+      "fpr": 0.012527533039647577
+    },
+    "read_attack": {
+      "n": 2907,
+      "detected": 1363,
+      "recall": 0.4688682490540076,
+      "fpr": NaN
+    },
+    "recognition_attack": {
+      "n": 62,
+      "detected": 62,
+      "recall": 1.0,
+      "fpr": NaN
+    },
+    "write_attack": {
+      "n": 5,
+      "detected": 5,
+      "recall": 1.0,
+      "fpr": NaN
+    }
+  }
+}

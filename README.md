@@ -6,3 +6,7 @@
     - [DEMO 1: SYSLOG COLLECTION FROM ROUTER](./Technologies_SIEM/Demo1/Syslog-Router.md)
     - [DEMO 2: SURICATA IDS ALERT GENERATION AND CENTRALIZED COLLECTION](./Technologies_SIEM/Demo2/Syslog-Suricata.md)
     - [DEMO 3: LOG NORMALIZATION WITH GRAYLOG](./Technologies_SIEM/Demo3/Normalization-Graylog.md)
+    - [DEMO 4: CORRELATION](./)
+    - [DEMO 5: FIREWALL](./)
+    - [DEMO 6: IDS](./)
+    - [DEMO 7: ANOMALY DETECTION](./Technologies_SIEM/Demo7/Anomaly-Detection.md)
