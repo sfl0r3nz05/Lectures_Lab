@@ -1,0 +1,44 @@
+# =====================================================================
+# REGLAS SURICATA - PROTECCIÓN MODBUS TCP (FULL SMOD COVERAGE)
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# 1. ESCANEOS DE RED Y DESCUBRIMIENTO
+# Cubre: portDiscover, discover, modbusdetect
+# ---------------------------------------------------------------------
+alert tcp any any -> any any (flags: S; msg:"Escaneo de Puertos Agresivo (SYN Scan)"; threshold: type both, track by_src, count 20, seconds 10; classtype:network-scan; sid:1000002; rev:1;)
+
+# ---------------------------------------------------------------------
+# 2. RECONOCIMIENTO Y EXTRACCIÓN DE DATOS (SCANNER)
+# Cubre: coilDiscover, discreteInputDiscover, holdingRegisterDiscover, inputRegisterDiscover, modbusClient, modbusBannerGrabbing
+# ---------------------------------------------------------------------
+# FC 1: Read Coils
+alert tcp any any -> any 5020 (msg:"Escaneo Modbus: Descubrimiento de Bobinas (FC 1)"; content:"|00 00|"; offset:2; depth:2; byte_test:1,=,1,7; classtype:network-scan; sid:2000011; rev:1;)
+
+# FC 2: Read Discrete Inputs
+alert tcp any any -> any 5020 (msg:"Escaneo Modbus: Descubrimiento de Entradas Discretas (FC 2)"; content:"|00 00|"; offset:2; depth:2; byte_test:1,=,2,7; classtype:network-scan; sid:2000012; rev:1;)
+
+# FC 3: Read Holding Registers
+alert tcp any any -> any 5020 (msg:"Escaneo Modbus: Lectura de Registros Holding (FC 3)"; content:"|00 00|"; offset:2; depth:2; byte_test:1,=,3,7; classtype:network-scan; sid:2000013; rev:1;)
+
+# FC 4: Read Input Registers
+alert tcp any any -> any 5020 (msg:"Escaneo Modbus: Lectura de Registros de Entrada (FC 4)"; content:"|00 00|"; offset:2; depth:2; byte_test:1,=,4,7; classtype:network-scan; sid:2000014; rev:1;)
+
+# FC 43: Read Device Identification
+alert tcp any any -> any 5020 (msg:"Reconocimiento Modbus: Lectura de ID de Dispositivo (Banner Grabbing - FC 43)"; content:"|00 00|"; offset:2; depth:2; byte_test:1,=,43,7; classtype:network-scan; sid:2000015; rev:1;)
+
+# ---------------------------------------------------------------------
+# 3. ATAQUES CRÍTICOS DE ESCRITURA Y SABOTAJE (DOS)
+# Cubre: writeSingleCoils, writeSingleCoilsID, writeSingleRegister, writeSingleRegisterID
+# ---------------------------------------------------------------------
+# FC 5: Write Single Coil
+alert tcp any any -> any 5020 (msg:"ALERTA CRITICA: Intento de Sabotaje Modbus (Write Single Coil - FC 5)"; content:"|00 00|"; offset:2; depth:2; byte_test:1,=,5,7; classtype:attempted-admin; sid:2000021; rev:1;)
+
+# FC 6: Write Single Register
+alert tcp any any -> any 5020 (msg:"ALERTA CRITICA: Intento de Sabotaje Modbus (Write Single Register - FC 6)"; content:"|00 00|"; offset:2; depth:2; byte_test:1,=,6,7; classtype:attempted-admin; sid:2000022; rev:1;)
+
+# ---------------------------------------------------------------------
+# 4. ANOMALÍAS DE VOLUMEN (FUERZA BRUTA Y DENEGACIÓN DE SERVICIO)
+# Cubre: floodingAttack, uid, modbusUIDScan, getfunc
+# ---------------------------------------------------------------------
+alert tcp any any -> any 5020 (msg:"Anomalia Modbus: Fuerza Bruta UID o DoS detectado"; content:"|00 00|"; offset:2; depth:2; threshold: type both, track by_src, count 60, seconds 5; classtype:attempted-dos; sid:2000031; rev:1;)

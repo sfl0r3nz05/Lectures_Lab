@@ -10,3 +10,4 @@
     - [DEMO 5: FIREWALL](./)
     - [DEMO 6: IDS](./)
     - [DEMO 7: ANOMALY DETECTION](./Technologies_SIEM/Demo7/Anomaly-Detection.md)
+    - [DEMO 8: HONEYPOT](./Technologies_SIEM/Demo7/Anomaly-Detection.md)
