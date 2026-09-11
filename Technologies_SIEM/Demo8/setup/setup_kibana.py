@@ -1,7 +1,7 @@
 import requests
 import time
 
-KIBANA_URL = "http://kibana:5601"
+KIBANA_URL = "http://localhost:5601"
 DATA_VIEW_NAME = "filebeat-*"
 
 def create_dataview():

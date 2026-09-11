@@ -10,4 +10,4 @@
     - [DEMO 5: IPTABLES](./Technologies_SIEM/Demo5/iptables.md)
     - [DEMO 6: IDS](./Technologies_SIEM/Demo2/Syslog-Suricata.md)
     - [DEMO 7: ANOMALY DETECTION](./Technologies_SIEM/Demo7/Anomaly-Detection.md)
-    - [DEMO 8: HONEYPOT](./Technologies_SIEM/Demo7/Anomaly-Detection.md)
+    - [DEMO 8: HONEYPOT](./Technologies_SIEM/Demo8/README.md)

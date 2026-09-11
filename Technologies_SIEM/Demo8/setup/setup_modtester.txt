@@ -9,7 +9,8 @@ git clone -b feature/metasploit https://github.com/sfl0r3nz05/ModTester.git
 cd ModTester
 python modTester.py
 
-comprobar IP: docker inspect tfm_compot | findstr "IPAddress"
-ataque: set RHOSTS 172.18.0.7
-	set RPORT 5020
-	set UID 1
+comprobar IP: docker inspect tfm_compot | grep "IPAddress"
+ataque: set RHOSTS 172.20.0.3
+		set RPORT 5020
+		set UID 1
+		exploit
