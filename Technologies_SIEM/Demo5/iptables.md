@@ -53,6 +53,7 @@ docker run -d \
 The default config writes to `/var/log/messages`. The TCP source must use the `network()` driver (not `syslog()`) with `flags(no-parse)`, since rsyslog's default TCP forwarding (`omfwd`) sends plain newline-delimited text rather than the octet-counted framing that syslog-ng's `syslog()` driver expects. Using the wrong driver causes `Invalid frame header` errors and the connection being dropped after every message.
 
 ```
+cat > /config/syslog-ng.conf << 'EOF'
 @version: 4.2
 @include "scl.conf"
 
@@ -79,6 +80,7 @@ log {
   source(s_network_udp);
   destination(d_local);
 };
+EOF
 ```
 
 Apply changes by editing the file inside the running container (or the mounted volume path on the host), ensure var/log ownership and restarting:
