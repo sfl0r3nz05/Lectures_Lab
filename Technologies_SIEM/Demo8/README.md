@@ -30,16 +30,29 @@ Una vez dentro del prompt del ModTester, elija el vector de ataque deseado:
 
 ### Escaneo de registros:
 
-````
+```
 use modbus/scanner/holdingRegisterDiscover
 set RHOSTS 172.18.0.6 (o la ip que tenga asignada conpot)
 set RPORT 5020
+set UID 1
 exploit
-````
+```
+
+```
+use modbus/scanner/writeSingleRegister
+set RHOSTS 172.18.0.6 (o la ip que tenga asignada conpot)
+set RPORT 5020
+set UID 4
+exploit
+```
 
 ### 3. Visualización de Resultados
 
+- Configurar Kibana dashboard: `python3 setup/setup_kibana.py`
 - Monitorización: Puede acceder a Kibana para ver la traza del ataque en tiempo real en http://localhost:5601.
+- Clic en Analytics/Discover
+
+<img src="kibana.png" width="1000">
 
 ### 4. Solución de problemas
 
