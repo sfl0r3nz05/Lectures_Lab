@@ -1,4 +1,4 @@
-# Firewall Event Logging Pipeline (iptables → syslog-ng)
+# Firewall Event Logging Pipeline
 
 This sets up a pipeline that captures `iptables` blocked traffic on the host and forwards those events to a centralized `syslog-ng` server running in Docker.
 
