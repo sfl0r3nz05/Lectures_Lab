@@ -1,4 +1,4 @@
-# Hneypot-SIEM integration
+# Honeypot-SIEM integration
 
 Este demostración despliega un entorno industrial que incluye la herramienta de ataque ModTester, el honeypot ICS Conpot, el IDS Suricata, la infraestructura ELK.
 
@@ -52,7 +52,7 @@ exploit
 - Monitorización: Puede acceder a Kibana para ver la traza del ataque en tiempo real en http://localhost:5601.
 - Clic en Analytics/Discover
 
-<img src="kibana.png" width="1000">
+<img src="kibana.png" width="950">
 
 ### 4. Solución de problemas
 
