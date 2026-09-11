@@ -48,7 +48,7 @@ docker run -d \
 
 ### syslog-ng.conf
 
-> Placed in /config/syslog-ng.conf
+> Placed in /etc/syslog-ng/syslog-ng.conf
 
 The default config writes to `/var/log/messages`. The TCP source must use the `network()` driver (not `syslog()`) with `flags(no-parse)`, since rsyslog's default TCP forwarding (`omfwd`) sends plain newline-delimited text rather than the octet-counted framing that syslog-ng's `syslog()` driver expects. Using the wrong driver causes `Invalid frame header` errors and the connection being dropped after every message.
 
@@ -81,9 +81,10 @@ log {
 };
 ```
 
-Apply changes by editing the file inside the running container (or the mounted volume path on the host) and restarting:
+Apply changes by editing the file inside the running container (or the mounted volume path on the host), ensure var/log ownership and restarting:
 
 ```bash
+docker exec -u root -it syslog-ng chown -R 1000:1000 /var/log
 docker restart syslog-ng
 ```
 
@@ -138,8 +139,7 @@ sudo systemctl restart rsyslog
 
 ## 4. Test the pipeline
 
-Generate blocked traffic (no listening service required — the `DROP`
-happens at the netfilter level before any socket is involved):
+Generate blocked traffic (no listening service required — the `DROP` happens at the netfilter level before any socket is involved):
 
 ```bash
 nc -zv 127.0.0.1 8080
@@ -162,8 +162,9 @@ docker exec -it syslog-ng tail -f /var/log/messages
 ```
 
 A successful run shows a single clean line in `/var/log/messages`, e.g.:
+
 ```
-Sep 10 21:45:03 localhost kernel: [ 1955.123456] [FW-Blocked] IN=lo OUT= MAC=... SRC=127.0.0.1 DST=127.0.0.1 ... DPT=8080 ... SYN URGP=0
+Sep 11 04:30:24 localhost [26589.676448] [FW-Blocked] IN=lo OUT= MAC=00:00:00:00:00:00:00:00:00:00:00:00:08:00 SRC=127.0.0.1 DST=127.0.0.1 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=21648 DF PROTO=TCP SPT=48372 DPT=8080 WINDOW=65495 RES=0x00 SYN URGP=0 MARK=0x3887
 ```
 
 ## Useful inspection commands
