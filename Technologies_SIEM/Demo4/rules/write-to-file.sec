@@ -5,4 +5,4 @@ rem = after this rule has matched , don 't consider following \
     rules in this configuration file , since 'continue ' \
     defaults to 'DontCont '
 desc = Three A characters
-action = write - three A characters were observed
+action = write /tmp/sec_aaa.log %t: three A characters were observed
