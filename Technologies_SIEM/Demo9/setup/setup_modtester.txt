@@ -1,0 +1,16 @@
+docker exec -it tfm_modtester bash
+
+echo "deb http://archive.debian.org/debian buster main" > /etc/apt/sources.list
+echo "deb http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list
+echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until
+apt-get update && apt-get install -y git libpcap-dev hping3
+pip install --pre scapy[basic]
+git clone -b feature/metasploit https://github.com/sfl0r3nz05/ModTester.git
+cd ModTester
+python modTester.py
+
+comprobar IP: docker inspect tfm_compot | grep "IPAddress"
+ataque: set RHOSTS 172.20.0.3
+		set RPORT 5020
+		set UID 1
+		exploit

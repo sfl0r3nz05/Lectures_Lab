@@ -11,3 +11,4 @@
     - [DEMO 6: IDS](./Technologies_SIEM/Demo2/Syslog-Suricata.md)
     - [DEMO 7: ANOMALY DETECTION](./Technologies_SIEM/Demo7/Anomaly-Detection.md)
     - [DEMO 8: HONEYPOT](./Technologies_SIEM/Demo8/README.md)
+    - [DEMO 9: WAZUH](./Technologies_SIEM/Demo9/README.md)

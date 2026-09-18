@@ -1,0 +1,21 @@
+FROM python:2.7-slim
+
+# Configuramos los repositorios antiguos de Debian Buster
+RUN echo "deb http://archive.debian.org/debian buster main" > /etc/apt/sources.list && \
+    echo "deb http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list && \
+    echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until
+
+# Instalamos dependencias del sistema
+RUN apt-get update && apt-get install -y git libpcap-dev hping3
+
+# Instalamos librerías Python
+RUN pip install --pre scapy[basic]
+
+# Clonamos el repositorio directamente en la imagen
+RUN git clone -b feature/metasploit https://github.com/sfl0r3nz05/ModTester.git /ModTester
+
+# Definimos el directorio de trabajo
+WORKDIR /ModTester
+
+# Mantenemos el contenedor vivo
+CMD ["tail", "-f", "/dev/null"]

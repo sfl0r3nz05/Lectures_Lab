@@ -1,0 +1,26 @@
+strict.perms: false
+
+filebeat.inputs:
+- type: log
+  id: suricata-log
+  enabled: true
+  paths:
+    - /var/log/suricata/eve.json
+
+output.elasticsearch:
+  hosts: ["192.168.75.129:9200"]
+  username: "admin"
+  password: "admin"
+  protocol: "https"
+  ssl.verification_mode: "none"
+  index: "suricata-%{+yyyy.MM.dd}"
+
+setup.template.name: "suricata"
+setup.template.pattern: "suricata-*"
+setup.template.enabled: true
+
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat
+  name: filebeat

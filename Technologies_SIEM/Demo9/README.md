@@ -1,0 +1,69 @@
+# Honeypot-Wazuh integration
+
+Este demostración despliega un entorno industrial que incluye la herramienta de ataque ModTester, el honeypot ICS Conpot, el IDS Suricata y Wazuh.
+
+## 1. Despliegue de Wazuh
+
+- Descargar el [OVA de Wazuh](https://documentation.wazuh.com/current/deployment-options/virtual-machine/virtual-machine.html).
+- Montar la VM como NAT.
+- Access to Wazuh dashboard:
+
+  ```log
+  URL: https://<WAZUH_SERVER_IP>
+  user: admin
+  password: admin
+  ```
+
+- Configurar Wazuh index: `python3 setup/setup_wazuh.py`
+
+## 2. Despliegue de la Infraestructura
+
+Para iniciar todo el ecosistema de servicios (Honeypot, IDS, SIEM), navega a la carpeta de infraestructura y ejecuta:
+
+  ```bash
+  cd Demo9
+  docker-compose up -d
+  ```
+
+Verifique que todos los contenedores están en ejecución con: 
+
+  ```bash
+  docker ps
+  ```
+
+## 2. Guía de Uso
+Para realizar una validación completa, siga estos pasos en terminales independientes:
+
+### A. Lanzar ataques desde ModTester
+Abra una segunda terminal para inyectar tráfico malicioso y generar evidencias:
+
+  ```bash
+  docker exec -it tfm_modtester bash
+  python modTester.py
+  ```
+Una vez dentro del prompt del ModTester, elija el vector de ataque deseado:
+
+### Escaneo de registros:
+
+  ```
+  use modbus/scanner/holdingRegisterDiscover
+  set RHOSTS 172.18.0.6 (o la ip que tenga asignada conpot)
+  set RPORT 5020
+  set UID 1
+  exploit
+  ```
+
+  ```
+  use modbus/dos/writeSingleRegister
+  set RHOSTS 172.18.0.6 (o la ip que tenga asignada conpot)
+  set RPORT 5020
+  set UID 4
+  exploit
+  ```
+
+### 3. Visualización de Resultados
+
+- Clic en Discover
+- Filtrar por `modbus-*`
+
+<img src="wazuh.png" width="950">

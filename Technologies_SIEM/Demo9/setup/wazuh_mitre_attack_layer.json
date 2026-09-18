@@ -1,0 +1,1177 @@
+{
+  "version": "4.5",
+  "name": "Wazuh Modbus Detection Coverage",
+  "domain": "enterprise-attack",
+  "description": "MITRE ATT&CK coverage for Modbus attacks detected by Wazuh + Suricata",
+  "techniques": [
+    {
+      "techniqueID": "$(threat.software.id)",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 99701",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1001",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 64238",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1003.001",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92900",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1003.002",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 92023, 92024, 92026",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1012",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 91808, 91836, 92025",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1014",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 521",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1016",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 91830, 91839",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1018",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 91805, 92103",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1021",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 11512, 5715, 89606, 89607",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1021.001",
+      "score": 8,
+      "comment": "Detected by 8 Wazuh rule(s): 67029, 92108, 92109, 92653, 92656",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1021.002",
+      "score": 6,
+      "comment": "Detected by 6 Wazuh rule(s): 67017, 92105, 92106, 92650, 99055",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1021.003",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 99057, 99058",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1021.004",
+      "score": 8,
+      "comment": "Detected by 8 Wazuh rule(s): 5706, 5710, 5760, 92020, 92603",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1021.006",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 91823, 92110",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1027",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 91828, 92041, 92214",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1027.004",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92006",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1033",
+      "score": 5,
+      "comment": "Detected by 5 Wazuh rule(s): 91817, 91831, 91839, 92022, 92030",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1036",
+      "score": 7,
+      "comment": "Detected by 7 Wazuh rule(s): 24709, 24710, 24711, 24712, 24713",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1036.002",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 92060, 92064",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1036.003",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 92016, 92017, 92051",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1041",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 99028",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1046",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 100200, 100202, 5731",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1047",
+      "score": 5,
+      "comment": "Detected by 5 Wazuh rule(s): 92069, 92070, 92071, 92080, 92654",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1048.001",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 99001, 99002, 99003",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1053.005",
+      "score": 5,
+      "comment": "Detected by 5 Wazuh rule(s): 67014, 67015, 67016, 92154, 92155",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1055",
+      "score": 12,
+      "comment": "Detected by 12 Wazuh rule(s): 31104, 31152, 31153, 31164, 31165",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1055.003",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92402",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1055.012",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92402",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1057",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 91815, 91832, 91841, 92604",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1059",
+      "score": 7,
+      "comment": "Detected by 7 Wazuh rule(s): 31154, 92001, 92003, 92005, 92048",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1059.001",
+      "score": 19,
+      "comment": "Detected by 19 Wazuh rule(s): 91822, 91823, 91837, 91843, 91844",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1059.003",
+      "score": 8,
+      "comment": "Detected by 8 Wazuh rule(s): 92002, 92004, 92032, 92035, 92036",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1059.005",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 92000, 92051, 92156",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1059.006",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 92600, 92601, 92602",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1059.007",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 31105, 92054",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1068",
+      "score": 5,
+      "comment": "Detected by 5 Wazuh rule(s): 31166, 31167, 31168, 31169, 5707",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1070",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 593, 6316, 83200, 83201",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1070.001",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 6302",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1070.004",
+      "score": 19,
+      "comment": "Detected by 19 Wazuh rule(s): 18655, 18656, 18657, 553, 597",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1070.006",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 91834",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1071",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 11209, 12101, 24215",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1071.001",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 31411",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1071.002",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 11512",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1071.004",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 82405, 99080, 99081, 99082",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1072",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 518, 64508",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1074.001",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 91821",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1078",
+      "score": 62,
+      "comment": "Detected by 62 Wazuh rule(s): 11205, 11309, 11402, 11503, 14120",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1078.002",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 92652, 92653, 92656, 92657",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1078.004",
+      "score": 6,
+      "comment": "Detected by 6 Wazuh rule(s): 99020, 99021, 99022, 99023, 99024",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1082",
+      "score": 6,
+      "comment": "Detected by 6 Wazuh rule(s): 91816, 91817, 91829, 91838, 92080",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1083",
+      "score": 15,
+      "comment": "Detected by 15 Wazuh rule(s): 30411, 31104, 31153, 31333, 31335",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1087",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 92031, 92032, 92033, 92039",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1087.002",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 91806",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1095",
+      "score": 17,
+      "comment": "Detected by 17 Wazuh rule(s): 11107, 11207, 18658, 18659, 18660",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1098.001",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 65071, 65073, 91709, 99029",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1098.002",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 91725",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1098.003",
+      "score": 6,
+      "comment": "Detected by 6 Wazuh rule(s): 99020, 99021, 99022, 99023, 99024",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1102",
+      "score": 6,
+      "comment": "Detected by 6 Wazuh rule(s): 30107, 30307, 44731, 44733, 87303",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1105",
+      "score": 20,
+      "comment": "Detected by 20 Wazuh rule(s): 91811, 92074, 92075, 92200, 92201",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1106",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 91810",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1110",
+      "score": 75,
+      "comment": "Detected by 75 Wazuh rule(s): 11109, 11111, 11210, 11251, 11252",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1110.001",
+      "score": 5,
+      "comment": "Detected by 5 Wazuh rule(s): 31509, 5503, 5557, 5710, 5760",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1112",
+      "score": 18,
+      "comment": "Detected by 18 Wazuh rule(s): 24708, 594, 597, 598, 750",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1113",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 91803",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1114",
+      "score": 20,
+      "comment": "Detected by 20 Wazuh rule(s): 3102, 3103, 3104, 3105, 3106",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1114.001",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 91845",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1114.003",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 91707, 91708",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1115",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 91824",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1119",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 91820, 99836",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1120",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 100201, 91840",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1133",
+      "score": 23,
+      "comment": "Detected by 23 Wazuh rule(s): 14151, 14203, 14251, 4336, 4337",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1135",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 92034, 92035",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1136",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 80718, 91704",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1136.001",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92040",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1136.003",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 65070",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1137.006",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 91558",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1140",
+      "score": 6,
+      "comment": "Detected by 6 Wazuh rule(s): 91809, 92016, 92017, 92018, 92072",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1176",
+      "score": 13,
+      "comment": "Detected by 13 Wazuh rule(s): 24705, 24706, 24801, 24802, 24803",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1190",
+      "score": 18,
+      "comment": "Detected by 18 Wazuh rule(s): 30306, 31103, 31104, 31106, 31109",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1203",
+      "score": 9,
+      "comment": "Detected by 9 Wazuh rule(s): 31501, 31514, 80714, 87001, 87002",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1204",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 80712",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1204.001",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 99532, 99591, 99607",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1204.002",
+      "score": 6,
+      "comment": "Detected by 6 Wazuh rule(s): 92064, 92078, 92079, 99532, 99591",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1204.003",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 99532, 99591, 99607",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1210",
+      "score": 9,
+      "comment": "Detected by 9 Wazuh rule(s): 11218, 31110, 31506, 31512, 31513",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1212",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 31502, 80740",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1213",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 99836",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1213.002",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 91542, 91544, 91561, 91724",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1213.003",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 99837",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1218",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92076",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1218.005",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 92047, 92048",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1218.011",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 92079, 92081",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1218.012",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 92049, 92050",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1222",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 65060, 65061",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1222.002",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 89600, 89601",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1484",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 67028",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1485",
+      "score": 11,
+      "comment": "Detected by 11 Wazuh rule(s): 4505, 553, 597, 65066, 751",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1486",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 99535, 99594",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1489",
+      "score": 10,
+      "comment": "Detected by 10 Wazuh rule(s): 18662, 18664, 18667, 6303, 6308",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1497",
+      "score": 6,
+      "comment": "Detected by 6 Wazuh rule(s): 19150, 19151, 19152, 19153, 91838",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1498",
+      "score": 16,
+      "comment": "Detected by 16 Wazuh rule(s): 100205, 31163, 31533, 65261, 65262",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1498.001",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 6360",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1499",
+      "score": 28,
+      "comment": "Detected by 28 Wazuh rule(s): 11219, 12101, 30116, 30316, 31115",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1505.003",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 31505, 31514",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1518.001",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 91835, 92077",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1526",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 91715, 91716, 91717, 91718",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1529",
+      "score": 7,
+      "comment": "Detected by 7 Wazuh rule(s): 18665, 19120, 50120, 50520, 50521",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1530",
+      "score": 6,
+      "comment": "Detected by 6 Wazuh rule(s): 65051, 65052, 99026, 99027, 99836",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1531",
+      "score": 5,
+      "comment": "Detected by 5 Wazuh rule(s): 65063, 65064, 65065, 65072, 80719",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1537",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 65062",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1543.003",
+      "score": 7,
+      "comment": "Detected by 7 Wazuh rule(s): 6301, 6302, 6361, 6374, 83202",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1546",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92076",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1546.003",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 89501, 89502",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1546.011",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 92058, 92059, 92157",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1546.015",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 92308, 92309",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1547.001",
+      "score": 9,
+      "comment": "Detected by 9 Wazuh rule(s): 24701, 24708, 91844, 92225, 92226",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1547.012",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92655",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1548",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 92061, 92062",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1548.001",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 24059",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1548.002",
+      "score": 7,
+      "comment": "Detected by 7 Wazuh rule(s): 92046, 92055, 92056, 92062, 92304",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1548.003",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 80721",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1550.002",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 92602, 92652, 92657",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1552",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 92223, 99838",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1552.004",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92224",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1555",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92153",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1555.003",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 31550",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1556.006",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 99846, 99847",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1557.002",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 6321",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1559.001",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92050",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1560",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 91826, 91827",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1560.001",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 91825, 91846, 92067",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1561",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 100203, 100204",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1561.001",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 31413, 87902, 87914, 87921",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1562",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 65053, 65058, 65059, 92007",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1562.001",
+      "score": 16,
+      "comment": "Detected by 16 Wazuh rule(s): 504, 505, 506, 52510, 81609",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1562.004",
+      "score": 9,
+      "comment": "Detected by 9 Wazuh rule(s): 4339, 4340, 4342, 4509, 64024",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1562.007",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 65054, 65055, 99028",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1562.008",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 65056, 65057, 99030",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1565.001",
+      "score": 5,
+      "comment": "Detected by 5 Wazuh rule(s): 550, 592, 594, 750, 80714",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1566",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 99613",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1567",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92037",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1567.002",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92038",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1569.002",
+      "score": 5,
+      "comment": "Detected by 5 Wazuh rule(s): 24702, 6373, 6376, 92068, 92650",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1570",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 92202, 92217, 92218, 92220",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1574",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92220",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1574.001",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 92036, 92219",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1574.002",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 92019, 92219",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1574.010",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 92206",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1584.002",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 99080, 99081, 99082",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1586",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 99612",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1587.001",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 99532, 99591, 99607",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1587.004",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 99528, 99549, 99568, 99587",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1588.001",
+      "score": 3,
+      "comment": "Detected by 3 Wazuh rule(s): 99532, 99591, 99607",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "T1589.001",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 99612",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1595",
+      "score": 1,
+      "comment": "Detected by 1 Wazuh rule(s): 6323",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "T1595.002",
+      "score": 2,
+      "comment": "Detected by 2 Wazuh rule(s): 31151, 31161",
+      "enabled": true,
+      "color": "#f39c12"
+    },
+    {
+      "techniqueID": "TA0001",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 99530, 99551, 99570, 99589",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "TA0002",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 99529, 99550, 99569, 99588",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "TA0003",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 99533, 99553, 99572, 99592",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "TA0004",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 99534, 99554, 99573, 99593",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "TA0005",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 99525, 99546, 99565, 99584",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "TA0006",
+      "score": 5,
+      "comment": "Detected by 5 Wazuh rule(s): 99524, 99545, 99564, 99583, 99612",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "TA0007",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 99526, 99547, 99566, 99585",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "TA0008",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 99531, 99552, 99571, 99590",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "TA0009",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 99523, 99544, 99563, 99582",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "TA0010",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 99527, 99548, 99567, 99586",
+      "enabled": true,
+      "color": "#27ae60"
+    },
+    {
+      "techniqueID": "TA0011",
+      "score": 4,
+      "comment": "Detected by 4 Wazuh rule(s): 99522, 99543, 99562, 99581",
+      "enabled": true,
+      "color": "#27ae60"
+    }
+  ]
+}

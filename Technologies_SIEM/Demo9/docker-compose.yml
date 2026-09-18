@@ -1,0 +1,76 @@
+services:
+  compot:
+    image: honeynet/conpot:latest
+    container_name: tfm_compot
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    ports:
+      - "502:502"
+    networks:
+      - red_industrial
+
+  suricata:
+    image: jasonish/suricata:latest
+    container_name: tfm_suricata
+    network_mode: "service:compot"
+    depends_on:
+      - compot
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_NICE
+    volumes:
+      - ./suricata/logs:/var/log/suricata:rw
+      - ./suricata/rules/suricata.rules:/var/lib/suricata/rules/suricata.rules
+    command: -i eth0 -S /var/lib/suricata/rules/suricata.rules
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat-oss:7.10.2
+    container_name: tfm_filebeat
+    user: root
+    command: filebeat -e -strict.perms=false
+    volumes:
+      - ./suricata/logs:/var/log/suricata:ro
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+#    depends_on:
+#      - elasticsearch
+    networks:
+      - red_industrial
+
+#  elasticsearch:
+#    image: elasticsearch:8.13.0
+#    container_name: tfm_elasticsearch
+#    environment:
+#      - discovery.type=single-node
+#      - xpack.security.enabled=false
+#      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+#    ports:
+#      - "9200:9200"
+#    networks:
+#      - red_industrial
+#
+#  kibana:
+#    image: kibana:8.13.0
+#    container_name: tfm_kibana
+#    environment:
+#      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+#    ports:
+#      - "5601:5601"
+#    depends_on:
+#      - elasticsearch
+#    networks:
+#      - red_industrial
+
+  modtester:
+    build:
+      context: .
+      dockerfile: Dockerfile.modtester
+    container_name: tfm_modtester
+    privileged: true
+    networks:
+      - red_industrial
+
+networks:
+  red_industrial:
+    driver: bridge
