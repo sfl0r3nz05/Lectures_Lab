@@ -1,6 +1,15 @@
 # Usar el el módulo FIM:
 
-1. Instalar Wazuh agent en un [entorno Linux](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html): 
+1. Instalar Wazuh agent en un [entorno Linux](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html).
+
+- Controlar Wazuh Agent: 
+        
+ ```bash
+ systemctl start wazuh-agent
+ systemctl stop wazuh-agent
+ systemctl status wazuh-agent
+ ```
+
 2. Instalar Audit
 
     ```bash
