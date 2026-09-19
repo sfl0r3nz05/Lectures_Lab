@@ -30,3 +30,14 @@
 9. Ejecutar query para buscar el archivo:
 
     ![](query.png)
+
+10. ¿Dónde el agente almacena la información?
+
+ ```log
+ $ sudo ls -la /var/ossec/queue/fim/db
+ total 1464
+ drwxr-x--- 2 wazuh wazuh    4096 Sep 19 12:16 .
+ drwxr-x--- 3 wazuh wazuh    4096 Sep 19 07:56 ..
+ -rw-r----- 1 root  wazuh 1490944 Sep 19 12:17 fim.db
+ -rw-r----- 1 root  wazuh       0 Sep 19 12:17 fim.db-journal
+ ```
