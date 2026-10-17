@@ -1,69 +1,43 @@
-# Honeypot-Wazuh integration
+# Usar el el módulo FIM:
 
-Este demostración despliega un entorno industrial que incluye la herramienta de ataque ModTester, el honeypot ICS Conpot, el IDS Suricata y Wazuh.
+1. Instalar Wazuh agent en un [entorno Linux](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html).
 
-## 1. Despliegue de Wazuh
+- Controlar Wazuh Agent: 
+        
+ ```bash
+ systemctl start wazuh-agent
+ systemctl stop wazuh-agent
+ systemctl status wazuh-agent
+ ```
 
-- Descargar el [OVA de Wazuh](https://documentation.wazuh.com/current/deployment-options/virtual-machine/virtual-machine.html).
-- Montar la VM como NAT.
-- Access to Wazuh dashboard:
+2. Instalar Audit
 
-  ```log
-  URL: https://<WAZUH_SERVER_IP>
-  user: admin
-  password: admin
-  ```
+    ```bash
+    sudo apt -y install auditd
+    sudo systemctl start auditd
+    sudo systemctl enable auditd
+    ```
+3. Crear carpeta para ser monitorizada: `mkdir /tmp/demo`
+4. Declararla en archivo de config en `/var/ossec/etc/ossec.conf`: 
+    <directories realtime=”yes”>/tmp/demo</directories>
+5. systemctl restart wazuh-agent
+6. systemctl status wazuh-agent
+7. Crear archivo en directorio de prueba: `touch /tmp/demo/file1`
+8. Visualizar eventos generados tras la creación del archivo test1:
 
-- Configurar Wazuh index: `python3 setup/setup_wazuh.py`
+    ![](test1.png)
 
-## 2. Despliegue de la Infraestructura
+9. Ejecutar query para buscar el archivo:
 
-Para iniciar todo el ecosistema de servicios (Honeypot, IDS, SIEM), navega a la carpeta de infraestructura y ejecuta:
+    ![](query.png)
 
-  ```bash
-  cd Demo9
-  docker-compose up -d
-  ```
+10. ¿Dónde el agente almacena la información?
 
-Verifique que todos los contenedores están en ejecución con: 
-
-  ```bash
-  docker ps
-  ```
-
-## 2. Guía de Uso
-Para realizar una validación completa, siga estos pasos en terminales independientes:
-
-### A. Lanzar ataques desde ModTester
-Abra una segunda terminal para inyectar tráfico malicioso y generar evidencias:
-
-  ```bash
-  docker exec -it tfm_modtester bash
-  python modTester.py
-  ```
-Una vez dentro del prompt del ModTester, elija el vector de ataque deseado:
-
-### Escaneo de registros:
-
-  ```
-  use modbus/scanner/holdingRegisterDiscover
-  set RHOSTS 172.18.0.6 (o la ip que tenga asignada conpot)
-  set RPORT 5020
-  set UID 1
-  exploit
-  ```
-
-  ```
-  use modbus/dos/writeSingleRegister
-  set RHOSTS 172.18.0.6 (o la ip que tenga asignada conpot)
-  set RPORT 5020
-  set UID 4
-  exploit
-  ```
-
-### 3. Visualización de Resultados
-
-- Clic en Discover
-- Filtrar por `modbus-*`
-
-<img src="wazuh.png" width="950">
+ ```log
+ $ sudo ls -la /var/ossec/queue/fim/db
+ total 1464
+ drwxr-x--- 2 wazuh wazuh    4096 Sep 19 12:16 .
+ drwxr-x--- 3 wazuh wazuh    4096 Sep 19 07:56 ..
+ -rw-r----- 1 root  wazuh 1490944 Sep 19 12:17 fim.db
+ -rw-r----- 1 root  wazuh       0 Sep 19 12:17 fim.db-journal
+ ```

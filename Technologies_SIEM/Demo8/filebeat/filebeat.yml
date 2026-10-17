@@ -1,19 +1,26 @@
 strict.perms: false
 
 filebeat.inputs:
-- type: filestream
-  id: suricata-filestream
+- type: log
+  id: suricata-log
   enabled: true
   paths:
     - /var/log/suricata/eve.json
-  parsers:
-    - ndjson:
-        keys_under_root: true
-        overwrite_keys: true
-        message_key: "message"
 
 output.elasticsearch:
-  hosts: ["elasticsearch:9200"]
+  hosts: ["192.168.75.129:9200"]
+  username: "admin"
+  password: "admin"
+  protocol: "https"
+  ssl.verification_mode: "none"
+  index: "suricata-%{+yyyy.MM.dd}"
 
-setup.kibana:
-  host: "kibana:5601"
+setup.template.name: "suricata"
+setup.template.pattern: "suricata-*"
+setup.template.enabled: true
+
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat
+  name: filebeat
