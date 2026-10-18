@@ -1,0 +1,2 @@
+07/15/2026-09:32:49.194249  [**] [1:1000001:2] Ataque o Escaneo MODBUS detectado en Honeypot [**] [Classification: (null)] [Priority: 3] {TCP} 172.18.0.2:50152 -> 172.18.0.7:5020
+07/15/2026-09:38:37.189522  [**] [1:1000001:2] Ataque o Escaneo MODBUS detectado en Honeypot [**] [Classification: (null)] [Priority: 3] {TCP} 172.18.0.2:37176 -> 172.18.0.7:5020
