@@ -7,7 +7,7 @@ Este demostración despliega un entorno industrial que incluye la herramienta de
 Para iniciar todo el ecosistema de servicios (Honeypot, IDS, SIEM), navega a la carpeta de infraestructura y ejecuta:
 
 ```bash
-cd Demo8
+cd Demo7
 docker-compose up -d
 ```
 
@@ -18,6 +18,17 @@ docker ps
 
 ## 2. Guía de Uso
 Para realizar una validación completa, siga estos pasos en terminales independientes:
+
+### A. Instalar nmap en modTester
+
+```bash
+docker exec -it tfm_modtester bash
+apt update
+apt install nmap
+nmap -sN <net_ip>/24
+sudo nmap -sS -p5020  <ip a>
+nmap -p 502 --script modbus-discover --script-args='modbus-discover.aggressive=true' <ip a>
+```
 
 ### A. Lanzar ataques desde ModTester
 Abra una segunda terminal para inyectar tráfico malicioso y generar evidencias:
@@ -53,6 +64,12 @@ exploit
 - Clic en Analytics/Discover
 
 <img src="kibana.png" width="950">
+
+- Filter to verify alerts
+
+```bash
+alert.signature_id : 2000013
+```
 
 ### 4. Solución de problemas
 

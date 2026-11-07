@@ -3,7 +3,7 @@ ptype= SubStr
 pattern= CCC
 rem= after this rule has matched, continue from last rule \
     in this configuration file
-continue= GoTo lastRule
+continue= TakeNext
 desc= Three C characters
 action= write - three C characters were observed
 
