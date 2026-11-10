@@ -62,3 +62,6 @@
 17. Not select other feature.
 
 18. Wait for final installation steps.
+
+19. Select reboot after installation is finalized.
+    <img src="reboot.png" width="450">
