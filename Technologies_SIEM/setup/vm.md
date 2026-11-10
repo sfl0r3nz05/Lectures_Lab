@@ -8,10 +8,58 @@
 
 3. Installing by selecting ISO image as disk:
 
-    ![](select-iso.png)
+    ![](select-iso.png){ width=550 }
 
 4. Provide a name and a path for VM location:
 
-    ![](vm-location.png)
+    ![](vm-location.png){ width=550 }
 
-5. 
+5. Set size disk and storing mechanism:
+
+    ![](disk.png){ width=550 }
+
+6. Other relevant features: RAM 4096, CPU: 2, NetAdapter: NAT
+
+    ![](ram.png){ width=550 }
+
+7. Select installation method:
+
+    ![](grub.png){ width=550 }
+
+8. Select prefered languaje:
+
+    ![](select-lang.png){ width=550 }
+
+9. Continue without update:
+
+    ![](update.png){ width=350 }
+
+10. Select keyboard:
+
+    ![](keyboard.png){ width=450 }
+
+11. Select Installation base:
+
+    ![](installation-base.png){ width=450 }
+
+12. If VM is network connected DHCP brings:
+
+    ![](dhcp.png){ width=450 }
+
+13. Selet entire disk:
+
+    ![](entire-disk.png){ width=450 }
+
+14. It is recommended to use the entire partion:
+
+    ![](vpartition.png){ width=450 }
+
+15. Add Name, Lastname, username and password.
+
+16. Install openssh during normal installation:
+
+     ![](openssh.png){ width=450 } 
+
+17. Not select other feature.
+
+18. Wait for final installation steps.
