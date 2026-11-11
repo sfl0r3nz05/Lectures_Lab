@@ -20,7 +20,7 @@
 
     <img src="disk.png" width="400" >
 
-6. Other relevant features: RAM 4096, CPU: 2, NetAdapter: NAT
+6. Other relevant features (minimum resources): RAM: 4096, CPU: 2, NetAdapter type: NAT
 
     <img src="ram.png" width="400" >
 
