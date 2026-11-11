@@ -4,11 +4,11 @@
 
 2. Create the VM on your preferred Type 2 hypervisor, such as VMware:
 
-    <img src="create-vm.png" width="450">
+    <img src="create-vm.png" width="350">
 
 3. Installing by selecting ISO image as disk:
 
-    <img src="select-iso.png" width="450" >
+    <img src="select-iso.png" width="350" >
 
 4. Provide a name and a path for VM location:
 
@@ -16,11 +16,11 @@
 
 5. Set size disk and storing mechanism:
 
-    <img src="disk.png" width="450" >
+    <img src="disk.png" width="350" >
 
 6. Other relevant features: RAM 4096, CPU: 2, NetAdapter: NAT
 
-    <img src="ram.png" width="450" >
+    <img src="ram.png" width="350" >
 
 7. Select installation method:
 
