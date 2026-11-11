@@ -30,33 +30,33 @@
 
 8. Select prefered languaje:
 
-    <img src="select-lang.png" width="600" >
+    <img src="select-lang.png" width="650" >
 
 9. Continue without update:
 
-    <img src="update.png" width="400" >
+    <img src="update.png" width="450" >
 
 10. Select keyboard:
 
-    <img src="keyboard.png" width="500" >
+    <img src="keyboard.png" width="550" >
 
 11. Select Installation base:
 
-    <img src="installation-base.png" width="500" >
+    <img src="installation-base.png" width="550" >
 
 12. If VM is network connected DHCP brings:
 
-    <img src="dhcp.png" width="500" >
+    <img src="dhcp.png" width="550" >
 
-13. Selet entire disk:
+13. Select entire disk:
 
-    <img src="entire-disk.png" width="500" >
+    <img src="entire-disk.png" width="525" >
 
 14. It is recommended to use the entire partion:
 
-    <img src="vpartition.png" width="500" >
+    <img src="vpartition.png" width="550" >
 
-15. Add Name, Lastname, username and password.
+15. Add *Name*, *Lastname*, *username* and *password*.
 
 16. Install openssh during normal installation:
 
@@ -76,7 +76,7 @@
 
 21. Obtain the ip address of the remote VM:
 
-    <img src="ip_add.png" width="450">
+    <img src="ip_add.png" width="500">
 
 22. Connect to a host by using the remote ssh extension:
 
@@ -90,7 +90,7 @@
 
 26. VSCode is connected to the created VM:
 
-    <img src="connected.png" width="450">
+    <img src="connected.png" width="500">
 
 ## Docker installation
 
@@ -154,10 +154,10 @@
     d5e71e642bf5: Download complete 
     Digest: sha256:c567b231f65614688711a75f31518a064258a51d442117a3e771a3a8fdba78ef
     Status: Downloaded newer image for hello-world:latest
-    
+
     Hello from Docker!
     This message shows that your installation appears to be working correctly.
-    
+
     To generate this message, Docker took the following steps:
      1. The Docker client contacted the Docker daemon.
      2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
@@ -166,13 +166,13 @@
         executable that produces the output you are currently reading.
      4. The Docker daemon streamed that output to the Docker client, which sent it
         to your terminal.
-    
+
     To try something more ambitious, you can run an Ubuntu container with:
      $ docker run -it ubuntu bash
-    
+
     Share images, automate workflows, and more with a free Docker ID:
      https://hub.docker.com/
-    
+
     For more examples and ideas, visit:
      https://docs.docker.com/get-started/
     ```
