@@ -8,19 +8,19 @@
 
 3. Installing by selecting ISO image as disk:
 
-    <img src="select-iso.png" width="550" >
+    <img src="select-iso.png" width="450" >
 
 4. Provide a name and a path for VM location:
 
-    <img src="vm-location.png" width="550" >
+    <img src="vm-location.png" width="450" >
 
 5. Set size disk and storing mechanism:
 
-    <img src="disk.png" width="550" >
+    <img src="disk.png" width="450" >
 
 6. Other relevant features: RAM 4096, CPU: 2, NetAdapter: NAT
 
-    <img src="ram.png" width="550" >
+    <img src="ram.png" width="450" >
 
 7. Select installation method:
 
@@ -28,37 +28,37 @@
 
 8. Select prefered languaje:
 
-    <img src="select-lang.png" width="550" >
+    <img src="select-lang.png" width="600" >
 
 9. Continue without update:
 
-    <img src="update.png" width="350" >
+    <img src="update.png" width="400" >
 
 10. Select keyboard:
 
-    <img src="keyboard.png" width="450" >
+    <img src="keyboard.png" width="500" >
 
 11. Select Installation base:
 
-    <img src="installation-base.png" width="450" >
+    <img src="installation-base.png" width="500" >
 
 12. If VM is network connected DHCP brings:
 
-    <img src="dhcp.png" width="450" >
+    <img src="dhcp.png" width="500" >
 
 13. Selet entire disk:
 
-    <img src="entire-disk.png" width="450" >
+    <img src="entire-disk.png" width="500" >
 
 14. It is recommended to use the entire partion:
 
-    <img src="vpartition.png" width="450" >
+    <img src="vpartition.png" width="500" >
 
 15. Add Name, Lastname, username and password.
 
 16. Install openssh during normal installation:
 
-     <img src="openssh.png" width="450" > 
+     <img src="openssh.png" width="500" > 
 
 17. Not select other feature.
 
